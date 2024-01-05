@@ -11,7 +11,7 @@ Player.Idled:connect(function()
 end)
 
 -- AntiCheat By VG
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Extras/Anti-Cheat"))()
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Extras/Anti-Cheat"))()
 
 coroutine.wrap(function()
     -- check if firstRun
