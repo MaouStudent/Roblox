@@ -26,13 +26,20 @@ local function getTrees()
             end) then
                 local id = tonumber(object.Name)
                 local logs = object:GetAttribute("Logs")
-                table.insert(trees, {id = id,logs = logs,part = object,primaryPart = object.PrimaryPart})
+                table.insert(trees, {
+                    id = id,
+                    logs = logs,
+                    part = object,
+                    primaryPart = object.PrimaryPart
+                })
             end
         end
     end
 
     -- order by Logs
-    table.sort(trees, function(a, b) return a.logs > b.logs end)
+    table.sort(trees, function(a, b)
+        return a.logs > b.logs
+    end)
 
     return trees
 end
@@ -67,21 +74,29 @@ local function hitTrees()
     end
 end
 
+local function freeFish()
+    Communication:WaitForChild("FishCasted"):InvokeServer()
+    Communication:WaitForChild("CollectFishingRewards"):FireServer()
+end
+
 -- Main loop
 while true do
-    -- Create coroutines for hitting trees and mega ores
+    -- Create coroutines
     local hitTreesCoroutine = coroutine.create(hitTrees)
     local hitMegasCoroutine = coroutine.create(hitMegas)
+    local freeFishCoroutine = coroutine.create(freeFish)
 
     -- Resume (start) the coroutines
     coroutine.resume(hitTreesCoroutine)
     coroutine.resume(hitMegasCoroutine)
+    coroutine.resume(freeFishCoroutine)
 
     -- Wait for both coroutines to finish
-    while coroutine.status(hitTreesCoroutine) ~= 'dead' or coroutine.status(hitMegasCoroutine) ~= 'dead' do
+    while coroutine.status(hitTreesCoroutine) ~= 'dead' or coroutine.status(hitMegasCoroutine) ~= 'dead' or
+        coroutine.status(freeFishCoroutine) ~= 'dead' do
         task.wait()
     end
 
-    task.wait(1)
+    task.wait()
     Communication:WaitForChild("SellLogs"):FireServer()
 end
