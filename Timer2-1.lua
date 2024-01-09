@@ -146,20 +146,13 @@ local function getMegaTrees()
             return object:GetAttribute("Health") > 0
         end) then
             local id = tonumber(object.Name)
-            local logs = object:GetAttribute("Logs")
             table.insert(trees, {
                 id = id,
-                logs = logs,
                 part = object,
                 primaryPart = object.PrimaryPart
             })
         end
     end
-
-    -- sort by logs
-    table.sort(trees, function(a, b)
-        return a.logs > b.logs
-    end)
 
     return trees
 end
