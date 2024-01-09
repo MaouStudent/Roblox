@@ -278,9 +278,7 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
             pcall(function()
                 local tress = getTrees()
                 for _, tree in ipairs(tress) do
-                    for i = 1, 100 do
-                        Communication.HitTree:FireServer(tree.id)
-                    end
+                    Communication.HitTree:FireServer(tree.id)
                     task.wait()
                 end
             end)
