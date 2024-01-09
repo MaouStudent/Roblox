@@ -2,10 +2,6 @@ if game.CoreGui:FindFirstChild("Neverlose1") then
     game.CoreGui.Neverlose1:Destroy()
 end
 
-for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
-    v:Disable()
-end
-
 local Neverlose_Main = {
     Settings = {
         CloseBind = "RightControl",
@@ -27,20 +23,7 @@ local Neverlose_Main = {
             Text = Color3.fromRGB(255,255,255),
             Glow = Color3.fromRGB(14, 191, 255)
         }
-    },
-        TweenService = game:GetService("TweenService"),
-        UIS = game:GetService("UserInputService"),
-        RunService = game:GetService("RunService"),
-        Market = game:GetService("MarketplaceService"),
-        Workspace = game:GetService("Workspace"),
-        ReplStorage = game:GetService("ReplicatedStorage"),
-        CoreGui = game:GetService("CoreGui"),
-        VirtualUser = game:GetService("VirtualUser"),
-        VirtualInputManager = game:GetService("VirtualInputManager"),
-        Players = game:GetService("Players"),
-        Client = game:GetService("Players").LocalPlayer,
-        HttpService = game:GetService("HttpService"),
-        Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+    }
 };
 
 local WhitelistedMouse = {Enum.UserInputType.MouseButton1, Enum.UserInputType.MouseButton2,Enum.UserInputType.MouseButton3}
@@ -58,9 +41,11 @@ local TweenService = game:GetService("TweenService");
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local req = (syn and syn.request) or (http and http.request) or http_request or nil
+local HttpService = game:GetService("HttpService")
 local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
 
-local GenerateGUID = Neverlose_Main.HttpService:GenerateGUID(false) 
+local GenerateGUID = HttpService:GenerateGUID(false)
 
 getgenv()[GenerateGUID] = true
 
@@ -75,6 +60,8 @@ function Neverlose_Main:PlaySound(SoundID)
     sound.Parent = workspace
     sound.Volume = 50
     sound:Play()
+    sound:Wait()
+    sound:Destroy()
 end
 
 local BuildInfo = loadstring(game:HttpGet"https://pastebin.com/raw/HzAeDGm4")()
@@ -84,7 +71,7 @@ local function MakeDraggable(topbarobject, object)
     local DragInput = nil
     local DragStart = nil
     local StartPosition = nil
-   
+
     local function Update(input)
        local Delta = input.Position - DragStart
        local pos =
@@ -141,125 +128,40 @@ Neverlose.Name = "Neverlose1"
 Neverlose.Parent = game.CoreGui
 Neverlose.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- -- this function converts a string to base64
--- function Neverlose_Main:encode(data)
---     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
---     return ((data:gsub('.', function(x) 
---         local r,b='',x:byte()
---         for i=8,1,-1 do r=r..(b%2^i-b%2^(i-1)>0 and '1' or '0') end
---         return r;
---     end)..'0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
---         if (#x < 6) then return '' end
---         local c=0
---         for i=1,6 do c=c+(x:sub(i,i)=='1' and 2^(6-i) or 0) end
---         return b:sub(c+1,c+1)
---     end)..({ '', '==', '=' })[#data%3+1])
--- end
- 
--- -- this function converts base64 to string
--- function Neverlose_Main:decode(data)
---     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
---     data = string.gsub(data, '[^'..b..'=]', '')
---     return (data:gsub('.', function(x)
---         if (x == '=') then return '' end
---         local r,f='',(b:find(x)-1)
---         for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
---         return r;
---     end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
---         if (#x ~= 8) then return '' end
---         local c=0
---         for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
---         return string.char(c)
---     end))
--- end
-
-local Random_Words = {
-    'clRhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJDU0dPTG9hZGluZ1NjcmVlbiIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIyaDIwbS math.cos BhdCAxNjos.datek1MjkxOTMzIChjdXJyZW50IHRpbWUgMTmath.math.d.f.floorY5NTIxMTQmath.minio.open4MyksIHdrpoll.-pbGwgcmVuZXcgaW4gMjBoMjBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIyaDEwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NT table.insert IxMjA4MyksIHdpbGwgcmVuZXcgaW4gMjBoMTBtDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzYwOiBhdHRlbXB0IHRvIGluZGV math.ceil 4IGdsb2JhbCAnc2NyaXB0X2RiJyAoYSBuaWwgd io.read mFsdWUpDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzA5OiBhdHRlbXB0IHRvIGluZGV4IGxvY2FsICd3b3JkJ math.sin yAoYSBudW1iZXIgdmFsdWUpDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIyaDAw stri string.rep ng.byte bSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMjY4MyksIHdpbGwgcmVuZXcgaW4gMjBoMDBtDQpDZXJ math.sqr table.pack t 0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDUwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMzI4MyksI string.reverse HdpbGwgcmVuZXcgaW4gMTloNTBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxa io.write DQwbSBhdCAxNjk1 string.gmatch MjkxOTMzIChjdXJyZW50 os.time  coroutine.yield IHRpbWUgMTY5NTIxMzg4MyksIHdpbGwgcmVuZXcgaW4gMTloNDBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDMwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxN string.sub DQ4MyksIHdpbGwgcmVuZXcgaW4gMTloMz table.sort BtDQpubCC3IFsiRmx1eCB math.max ZYXcgRGV2Il06MjgwOiBiYWQgYXJndW1lbnQgIzIgdG8 str string.upper ing.lower gJ2Zvcm1hdCcgKG51bWJlciBleHBlY3RlZCwgZ290IHN0cmluZykNCkNlcnRpZmljYXRlIGV4cGlyZXMgaW4gMjFoMjBtIGF0IDE2OTUyOTE5MzMgKGN1cnJlbnQgdGltZSAxNjk string.len 1MjE1MDgzKSwgd2lsbCByZW5ldyBp table.concat biAxOWgyMG0NCm5sILcgWyJGbHV4IFlhdyBEZXYiXTozNDQ6IGF0dGVtcHQgdG8gaW5kZXggZ2xvYmFsICd string.char wb3NpdG table.unpack lvbnMnIChhIG5pbCB2YWx1ZSk coroutine.resume NCm5sILcgWyJGbHV4IFlhdyBEZXYiXTozNDc6 debug.getinfo IGF0dGVtcHQgdG8gcGVyZm9ybSBmath.abshcml0aG1ldGljIG9uIGdsb2JhbCAnb2Zmc2V0JyAo table.remove(YSBuaW, coroutine.create):format(wgdmFsdWUp,string.find, "", math.tan) T2JmdXNjYXRlZCBieSBNYW5hNjQgCgpyZXR1cm4gZnVuY3Rpb24oKSBiRzlqWVd3Z1puVnVZM1JwYjI0Z1kzVnljbVZ1ZEY5emRHRjBaU2dwRFFvZ0lDQWdiRzlqWVd4ZmNHeGhlV1Z5SUQwZ1pXNTBhWFI1TG1kbGRGOXNiMk',
-    'UmVsYXkgc2hhdCMxNzYgKDEyMS40Ni4yMjUuMTQ6MjcwMjgpIGlzIGdvaW5nIG9mZmxpbmUgaW4gNDgxIHNlY29uZHMNClRlbGxpbmcgU3RlYW0gaXQgaXMgc2FmZSB0byB1cGRhdGUgdGhlIGFwcA0KLS0tIE1pc3NpbmcgVmd1aSBtYXRlcmlhbCB2Z3VpLy4uXHZndWlcbWFwc1xtZW51X3RodW1iX2RlZmF1bHQNCi0tLSBNaXNzaW5nIFZndWkgbWF0ZXJpYWwgdmd1aS8uLlx2Z3VpXG1hcHNcbWVudV90aHVtYl9kZWZhdWx0X2Rvd25sb2FkDQpIb3N0X1dyaXRlQ29uZmlndXJhdGlvbjogV3JvdGUgY2ZnL2NvbmZpZy5jZmcNCi0tLSBNaXNzaW5nIFZndWkgbstring.lowerWF0ZXJpYWwgdmd1aS8uLi92Z3VpL2ljb25fY29uX21lZGl1bS52bXQNClBpbmcgbWVhc3Vio.writeyZW1lbnQgY29tcGxldGVkDQpQaW5nIGxvY2F0aW9uOiBhbXM9MTMrMSxzdG89MTMrMSxzdG8yPTEzKzEsbXN0MT0xNCsxLGZyYT0yMSsyLzE3KzEsbWx4MT0xOstring.upperdebug.getinfoCsxLGxocj0zNCszLzE4KzEsd2F3PTIxKzIscGFyPTM1KzMvMjMrMSxpYWQ9MTAxKzEwLzEwMSsxLHNncD0xOTArMTkvMTkyKzE1LGdydT0yMDUrMjANClNEUiBSZWxheU5ldHdvcmtTdGF0dXM6io.openICBhdmFpbD1PSyAgY29uZmlnPU9LICBhbnlyZWxheT1PSyAgIChPSykNCkNoYW5nZUdhbWVVSVN0Ystring.reverseXRlOiBDU0dPX0dBTUVfVUlfU1RBVEVfSU5Umath.minUk9NT1ZJRSAtPiBDU0dPX0dBTUVfVUlfU1RBVEVfTUFJTk1FTlUNCkNDU0dPX0JsdXJUYXJnZXQgLSBVbmFibGUgdG8gZmluZCBwYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiQ1NHT0xvYWRpbmdTY3JlZW4iISBQYW5lbCBpcyBwb3NzaWJseSBjcmVhdGVkIGR5bmFtaWNhbGx5Lg0KQ0NTR09fQmx1clRhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJlb20td2lubmVyIiEgUGFuZWwgaXMgcG9zc2libHkgY3JlYXRlZCBkeW5hbWljYWxseS4NCkNDU0dPos.timeX0JsdXJUYXJnZXQgLSBVbmFibGUgdG8gZmluZCBwYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiaWQtbWFpbm1lbnUtbWlzc2lvbi1jYXJkLWJnIistring.table.unpackrepEgUGFuZWwgaXMgcG9zc2libHkgY3JlYXRlZCBkeW5hbWljYWxseS4NCkNDU0dPX0JsdXJUYXJnZXQgLSBVbmFibGUgdG8gZmluZCBmath.abswYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiaWQtb3AtbWFpbm1lbnUtdG9wIiEgUGFuZWwgaXMgcG9zc2libHkgY3JlYXRlZCBkeW5hbWljYWxseS4NCkNDU0dPX0JsdXJUYXJnZXQgLSBVbmFstring.gmatchibGUgdG8gZmluZCBwYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiaWQtdG91cm5hbWVudC1wYXNzLXN0YXR1cyIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDQ1NHT19CbHVyVGFyZ2V0IC0gVW5hYmxlIHRvIGZpbmQgcGFuZWwgd2l0aCB0aGUgZ2l2ZW4gaWQgImlkLW9wLW1haW5tZW51LXJld2FyZHMiISBQYW5lbCBpcyBwb3NzaWJseSBjcmVhdGVkIGR5bmFtaWNhbGx5Lg0KQ0NTR09fQmx1clRstring.charhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJpZC1vcC1tYWlubWVudS1taXNzaW9ucyIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDQ1NHT19Cmath.sinbHVyVGFyZ2V0IC0gVW5hYmxlIHRvIGZpbmQgcGFuZWwgd2l0aCB0aGUgZ2l2ZW4gaWQgtable.removeImlkLWFjdGstring.lenl2ZW1pc3Npb24tdG9vbHRpcCIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDQ1NHT19Cbstring.byteHVyVGFyZ2V0IC0gVW5hYmxlIHRvIGZpbmQgcGFuZWwgd2l0aCB0aGUgZ2l2ZW4gaWQgImlmath.sqrtkLWFjdGl2ZS1taXNzaW9uIiEgUGFuZWwgaXMgcG9zc2libHkgY3JlYXRlZCBkeW5hbWljYWxseS4NCkNDU0dPX0JsdXJUYXJnZXQgLSBVbmFibGUgdG8gZmluZCBwYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiQ1NHT0xvYWRpbmdTY3JlZW4iISBQYW5lbCBpcyBwb3NzaWJseSBjcmVhdGVos.datekIGR5bmFtaWNhbGx5Lg0KQ0NTR09fQmx1clRhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJDU0dPTG9hZGluZ1NjcmVlbiIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDZXJ0aWZpY2F0ZSBmath.ceilleHBpcmVzIGluIDIyaDIwbSBhdstring.subCAxNjk1MjkxOTMzICstring.findhjdXJyZW50math.cosIHRpbWUgMTY5NTIxMTmath.floorQ4MyksIHdpbGwgcmVuZXcgaW4gMjBoMjBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIyaDEwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMjA4math.maxMyksIHdpbGwgcmVuZXcgaW4gMjBoMTBtDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzYwOiBhdHRlbXB0IHRvIGluZGV4IGdsb2JhbCAnc2NyaXB0X2RiJyAoYSBuaWwgdmFsdWUpDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzA5OiBhdHRlbXB0IHRvIGluZGV4IGxvY2FsICd3b3JkJyAoYSBudW1iZXIgdmFsdWUpDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIytable.concataDAwbSBhdCAxNjk1MjkxOTMzIChtable.insertjdXJyZW50IHRpbWUgMTY5NTIxMtable.packjY4MyksIHdpbGwgcmVuZXcgaW4gMjBcoroutine.createoMDBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDUwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMzI4MyksIHdpbGwgcmVuZXcgaW4gMTloNTBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDQwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMzg4MyksIHdpbGwgcmVuZXcgaW4gMTloNDBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGstring.formatluIDIxcoroutine.resumeaDMwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxNDQ4MyksIHdpbGwgcmVuZXcgaW4gMTloMzBtDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MjgwOiBiYWQgYXJndW1lbnQgIzIgdG8gJ2Zvcm1hdCcgKG51bWJlciBleHBlY3RlZCwgZ290IHN0cmluZykNCkNlcnRpZmljYXRlIGV4cGlyZXMgaW4gMjFoMjBtIGF0io.readIDE2OTUyOTE5MzMgKGN1cnJlbnQgdGltZSAxNjk1MjE1MDgzKSwgd2lsbCByZW5ldyBpbiAxOWgyMG0NCm5sILcgWyJGbHV4IFlhdyBEZXYiXTozNDQ6IGF0dGVtcHQgdG8gaW5kZXggZ2xvYmFsICdwb3NpdGlvbnMnIChhIG5pbCB2YWx1ZSkNCm5sILcgWyJGbHV4IFlhdyBEZXYiXTozNDc6IGF0dGVtcHQgdG8gcGVyZm9ybSBhcml0aG1ldGljIG9uIGdsb2JhbCAnb2Zmc2V0JyAoYSBuaWwgdmFsdWUpDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzQ4OiBhdHRlbXB0Icoroutine.yieldHRvIHBlcmZvcm0gYXJpdGhtZXRpYyBvbiBsb2NhbCAnb2Zmc2V0JyAoYSBuaWwgdmFsdWUpDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDEwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxNTY4MyksIHdpbGwgcmVuZXcgaW4gMTloMTBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDAwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxNjI4MyksIHdpbGwgcmVuZXcgaW4gmath.tanMTloMDBttable.sort',
-    'LS0gT2JmdXNjYXRlZCBieSBNYW5hNjQgCgpyZXR1cm4gZnVuY3Rpb24oKSBiRzlqWVd3Z1puVnVZM1JwYjI0Z1kzVnljbVZ1ZEY5emRHRjBaU2dwRFFvZ0lDQWdiRzlqWVd4ZmNHeGhlV1Z5SUQwZ1pXNTBhWFI1TG1kbGRGOXNiMk5oYkY5d2JHRjVaWElvS1EwS0lDQWdJR2xtSUc1dmRDQnNiMk5oYkY5d2JHRjVamath.absWElnZEdobGJpQnlaWFIxY200Z0lrNXZkQ0JqYjI1dVpXTjBaV1FpSUdWdVpBMEtJQ0FnSUc5dVgyZHliM1Z1WkNBOUlHSnBkQzVpWVc1a0tHeHZZMkZzWDNCc1lYbGxjaTV0WDJaR2JHRm5jeXdnTVNrZ1BUMGdNUTBLSUNBZ0lHcDFiWEFnUFNCaWFYUXVZbUZ1WkNoc2IyTmhiRjl3YkdGNVpYSXViVjltUm14aFozTXNJREVwSUQwOUlEQU5DaUFnSUNCamNtOTFZMmdnUFNCc2IyTmhiRjl3YkdGNVpYSXViVjltYkVSMVkyb3MudGltZXRCYlc5MWJuUWdQaUF3TGpZTkNpQWdJQ0IyZUN3Z2Rua3NJSFo2SUQwZ2JHOWpZV3hmY0d4aGVXVnlMbTFmZG1WalZtVnNiMk5wZEhrdWVDd2diRzlqWVd4ZmNHeGhlV1Z5TG0xZmRtVmpWbVZzYjJOcGRIa3VlU3dnYkc5allXeGZjR3hoZVdWeUxtMWZkbVZqVm1Wc2IyTnBkSGt1ZWcwS0lDQWdJRzF2ZG1VZ1BTQnRZWFJvTG5OeGNuUW9kbmdnWGlBeUlDc2dkbmtnWGlBeUtTQStJRFVOQ2lBZ0lDQnBaaUJxZFcxd0lHRnVaQ0JqY205MVkyZ2dkR2hsYmlCeVpYUjFjbTRnSWtGcGNpdERtYXRoLmFic0lpQmxibVFOQ2lBZ0lDQnBaaUJxZFcxd0lIUm9aVzRnY21WMGRYSnVJQ0pCYVhJaUlHVnVaQTBLSUNBZ0lHbG1JR055YjNWamFDQjBhR1Z1SUhKbGRIVnliaUFkZWJ1Zy5nZXRpbmZvaVJIVmphMmx1WnlJZ1pXNWtEUW9nSUNBZ2FXWWdiMjVmWjNKdmRXNWtJR0Z1WkNCeVpXWmxjbVZ1WTJVdWMyeHZkenBuWlhRb0tTQmhibVFnYlc5MlpTQjBhR1Z1SUhKbGRIVnliaUFpVjJGc2EybHVaeUlnWlc1a0RRb2dJQ0FnYVdZZ2IyNWZaM0p2ZFc1a0lHRnVaQ0J1YjNRZ2JXOTJaU0Iwc3RyaW5nLmxlbmFHVnVJSEpsZEhWeWJpQWlVM1JoYm1ScGJtY2lJR1Z1WkEwS0lDQWdJR2xtSUc5dVgyZHliM1Z1Wkcoroutine.yieldNCaGJtUWdiVzkyWlNCMGFHVnVJSEpsZEhWeWJpQWlVblZ1Ym1sdVp5SWdaVzVrRFFwbGJtUU5DZzBLYkc5allXd2dablZ1WTNScGIyNGdRVzUwYVVWNGNHeHZhWFFvS1EwS0lDQWdJR2xtSUc5MGFHVnlYM1JoWW14bExrRllPbWRsZENncElIUm9aVzROQ2lBZ0lDQWdJQ0FnWTNaaGNpNWpiRjlzWVdkamIyMXdaVzV6WVhScGIyNDZhVzUwS0RBcERRb2dJQ0FnWld4elpRMEtJQ0FnSUNBZ0lDQmpkbUZ5TG1Oc1gyeGhaMk52YlhCbGJuTmhkR2x0bWF0aC5mbG9vcmFibGUudW5wYWNrdmJqcHBiblFvTVNrTkNpQWdJQ0JsYm1RTkNtVnVaQTBLRFFwc2Nvcm91dGluZS5jcmVhdGViMk5oYkNCM1pXRndiMjV6SUQwZ2V5SkhiRzlpWVd3aUxDSlRVMGN0TURnaUxDSlFhWE4wYjJ4eklpd2lRWFYwYjFOdWFYQmxjbk1pTENKVGJtbHdaWEp6SWl3aVVtbG1iR1Z6SWl3aVUwMUhjeUlzSWxOb2IzUm5kVzV6SWl3aVRXRmphR2x1WldkMWJuTWlMQ0pCVjFBaUxDSkJTeTAwTnlJc0lrMDBRVEV2VFRSQk5DSXNJa1JsYzJWeWRDQkZZV2RzWlNJc0lsSTRJRkpsZG05c2RtVnlJaXdpUVZWSEwxTkhJRFUxTXlJc0lsUmhjMlZ5SW4wTkNnMEtiRzlqWVd3dGFibGUuY29uY2F0Z1puVnVZM1JwYjI0Z1RHbHVhMTlFVkY5SVF5Z3BEUW9nSUNBZ2FXWWdiM1JvWlhKZmRHRmliR1V1VEdsdWExOUVWRjlJYVhSamFHRnVZMlU2WjJWMEtDa2dkR2hsYmcwS0lDQWdJQ0FnSUNCbWIzSWdhU3gySUdsdUlIQmhhWEp6S0hkbFlYQnZibk1wSUdSdkRRb2dJQ0FnSUNBZ0lDQWdJQ0IxYVM1bWFXNWtLQ0pCYVcxaWIzUWlMQ0FpVW1GblpXSnZkQ0lzSUNKVFpXeGxZM1JwYjI0aUxDQjJMQ0Fpby5yZWFkaVNHbDBJRU5vWVc1anN0cmluZy5maW5kWlNJc0lDSkViM1ZpYkdVZ1ZHRndJaWs2YzJWMEtIVnBMbVpwYm1Rb0lrRnBiV0p2ZENJc0lstring.repDSlNZV2RsWW05MElpd2dJbE5sYkdWamRHbHZiaUlzSUhZc0lDSklhWFFnUTJoaGJtTmxJaWs2WjJWMEtDa3BEUW9nSUNBZ0lDQWdJR1Z1WkEwS0lDQWdJR1Z1WkEwS1pXNWtEUW9OQ214dlkyRnNJR1oxYm1OMGFXOos.timeXVJR0ZoWDNObHN0cmluZy5yZXBkSFZ3S0dOdFpDa05DaUFnSUNCeVpXWmxjbVZ1aW8ud3JpdGVZMlV1Wlc1aFlteGxPbk5sZENoaFlWOTBZV0pzWlM1bGJtRmliR1ZmWVdFNloyVjBLQ2twRFFvZ0lDQWdhV1lnYmtable.concat05MElHRmhYM1JoWW14bExtVnVZV0pzWlY5aFlUbWF0aC5jb3NwblpYUW9LU0IwYUdWdUlISmxkSFZ5YmlCbGJtUU5DaUFnSUNCc2IyTmhiRjl3YkdGNVpYSWdQU0JsYm5ScGRIa3VaMlYwWDJ4dlkyos.dateRnNYM0JzWVhsbGNpZ3BEUW9nSUNBZstring.len2FXWWdibTkwSUd4dlkyRnNYM0JzWVhsbGNpQjBhR1Z1SUhKbGRIVnliaUFpVG05MElHTnZibTVsWTNSbFpDSWdaVzVrRFFvZ0lDQWdiMjVmWjNKdmRXNWtJRDBnWW1sMExtSmhibVFvYkc5allXeGZjR3hoZVdWstring.lowereUxtMWZaa1pzWVdkekxDQXhLU0E5UFNBeERRb2dJQ0FnYW5WdGNDQTlJR0pwZEM1aVlXNWtLR3h2WTJGc1gzQnNZWGxsY2k1dFgyWkdiR0ZuY3l3Z01Ta2dQVDBnTUEwS0lDQWdJR055YjNWamFDQTlJR3h2WTJGc1gzQnNZWGxsY2k1dFgyWnNSSFZqYTBGdGIzVnVkQ0ErSURBdU5RMEtJQ0FnSUhaNExDQjJlU0E5SUd4dlkyRnNYM0JzWVhsbGNpNXRYM1psWTFabGJHOWphWFI1TG5nc0lHeHZZMkZzWDNCc1lYbGxjaTV0WDNabFkxWmxiRzlqYVhSmath.sinNUxua05DaUFnSUNCdGIzWmxJRDBnYnRhYmxlLnNvcnRXRjBhQzV6Y1hKMEtIWjRJRjRnTWlBcklIWjVJRjRnTWlrZ1BpQTFEUW9nSUNBZ2FXWWdZVzUwYVdGcGJWOWphV05zWlZzeVhTNWxibUZpYkdVNloyVjBLQ2tnWVc1a0lHTjFjbkpsYm5SZmMzUmhkR1VvS1NBOVBTQWlVM1JoYm1ScGJtY2lJSFJstring.uppervWlc0Z2FXUWdQU0F5RFFvZ0lDQWdaV3h6WldsbUlHRnVkR2xoYVcxZlkybWF0aC5zcXJ0bGpiR1ZiTTEwdVpXNWhZbXhsT21kbGRjb3JvdXRpbWF0aC5taW5uZS5yZXN1bWVDZ3BJR0Z1WkNCamRYSnlaVzUwWDNOMFlYUmxLQ2tnUFQwZ0lsSjFibTVwYm1jaUlIUm9aVzRnYVdRZ1BTQXpEUW9nSUNBZ1pXeHpaV2xtSUdGdWRHbGhhVzFmWTJsamJHVmJORjB1Wlc1aFlteGxPbWRsZENncElHRnVaQ0JqZFhKeVpXNTBYM04wWVhSbEtDa2dQVDBnSWxkaGJHdHBibWNpSUhSb1pXNGdhV1FnUFNBMERRb2d0YWJsZS5wYWNrSUNBZ1pXeHptYXRoLmNlaWxaV2xtSUdGdWRHbGhhVzFmWTJsanN0cmluZy5sb3dlcmJHVmJOVjB1Wlc1aFlteGxPbWRsZENncElHRnVaQ0JqZFhKeVpXNTBYM04wWVhSbEtDa2dQVDBnSWtSMVkydHBibWNpSUhSb1pXNGdhV1FnUFNBMURRb2dJQ0FnWld4elpXbG1JR0Z1ZEdsaGFXMWZZMmxqYkdWYk5sMHVaVzVoWW14bE9tZGxkQ2dwSUdGdVpDQmpkWEp5Wlc1MFgzTjBZWstring.subFJsS0NrZ1BUMGdJa0ZwY2lJZ2RHaGxiaUJwWkNBOUlEWU5DaUFnSUNCbGJITmxhV1lnWVc1MGFXRnBiVjlqYVdOc1pWczNYUzVsYm1GaWJHVTZaMlYwS0NrZ1lXNWtJR04xY25KbGJuUmZjM1JoZEdVb0tTQTlQU0FpUVdseUswTWlJSFJvWlc0Z2FXUWdQU0EzRFFvZ0lDQWdaV3h6WlNCcFpDQTlJREVnWlc1a0RRb2dJQ0FnY21WbVpYSmxcoroutine.resume',
-    'GhlV1lRhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJDU0dPTG9hZGluZ1NZ5SUQwZ1pXNTBhWFI1TG1kbGRGOXNiMk5kIHBhbmVsIHdpdGggdGhlIGdpdmRzlqWVd3Z1puVnVZM1JwdCAtIFVuYWJsZSB0byBmaVZ1ZEY5em2hhdCRHRjBaUGdvaW5IHdpdGggdGhlIGdpdmYjI0Z1kzVnljb2dGhl"V1Z5SUQwZ1pXNTBhWFI1TG1kbGRGOXNiMk5oYkY5d2JHRjVaWElvS1EwS0lDQWdJR2xtSUc1dmRDQnNiMk5oYkY5d2JHRjVamath.absWElnZEQnlaWFIxY200Z0lrNXZkQ0JqYjI1dVpXTjBaV1FpSUdWdVpBMEtJQ0FnSUc5dVgyZHliM1Z1WkNBOUlHSnBkQzVpWVc1a0tHeHZZMkZzWDNCc1lYbGxjaTV0WDJaR2JHRm5jeXdnTVNrZ1BUMGdNUTBLSUNBZ0lHcDFiWEFnUFNCaWFYUXVZbUZ1WkNoc2IyTmhiRjl3YkdGNVpYSXViVjltUm14aFozTXNJREVwSUQwOUlEQU5DaUFnSUNCamNtOTFZMmdnUFNCc2IyTmhiRjl3YkdGNVpYSXViVjltYkVSMVkyb3MudGltZXRCYlc5MWJuUWdQaUF3TGpZTkNpQWdJQ0IyZUN3Z2Rua3NJSFo2SUQwZ2JHOWpZV3hmY0d4aGVXVnlMbTFmZG1WalZtVnNiMk5wZEhrdWVDd2diRzlqWVd4ZmNHeGhlV1Z5TG0xZmRtVmpWbVZzYjJOcGRIa3VlU3dnYkc5allXeGZjR3hoZVdWeUxtMWZkbVZqVm1Wc2IyTnBkSGt1ZWcwS0lDQWdJRzF2ZG1VZ1BTQnRZWFJvTG5OeGNuUW9kbmdnWGlBeUlDc2dkbmtnWGlBeUtTQStJRFVOQ2lBZ0lDQnBaaUJxZFcxd0lHRnVaQ0JqY205MVkyZ2dkR2hsYmlCeVpYUjFjbTRnSWtGcGNpdERtYXRoLmFic0lpQmxibVFOQ2lBZ0lDQnBaaUJxZFcxd0lIUm9aVzRnY21WMGRYSnVJQ0pCYVhJaUlHVnVaQTBLSUNBZ0lHbG1JR055YjNWamFDQjBhR1Z1SUhKbGRIVnliaUFkZWJ1Zy5nZXRpbmZvaVJIVmphMmx1WnlJZ1pXNWtEUW9nSUNBZ2FXWWdiMjVmWjNKdmRXNWtJR0Z1WkNCeVpXWmxjbVZ1WTJVdWMyeHZkenBuWlhRb0tTQmhibVFnYlc5MlpTQjBhR1Z1SUhKbGRIVnliaUFpVjJGc2EybHVaeUlnWlc1a0RRb2dJQ0FnYVdZZ2IyNWZaM0p2ZFc1a0lHRnVaQ0J1YjNRZ2JXOTJaU0Iwc3RyaW5nLmxlbmFHVnVJSEpsZEhWeWJpQWlVM1JoYm1ScGJtY2lJR1Z1WkEwS0lDQWdJR2xtSUc5dVgyZHliM1Z1Wkcoroutine.yieldNCaGJtUWdiVzkyWlNCMGFHVnVJSEpsZEhWeWJpQWlVblZ1Ym1sdVp5SWdaVzVrRFFwbGJtUU5DZzBLYkc5allXd2dablZ1WTNScGIyNGdRVzUwYVVWNGNHeHZhWFFvS1EwS0lDQWdJR2xtSUc5MGFHVnlYM1JoWW14bExrRllPbWRsZENncElIUm9aVzROQ2lBZ0lDQWdJQ0FnWTNaaGNpNWpiRjlzWVdkamIyMXdaVzV6WVhScGIyNDZhVzUwS0RBcERRb2dJQ0FnWld4elpRMEtJQ0FnSUNBZ0lDQmpkbUZ5TG1Oc1gyeGhaMk52YlhCbGJuTmhkR2x0bWF0aC5mbG9vcmFibGUudW5wYWNrdmJqcHBiblFvTVNrTkNpQWdJQ0JsYm1RTkNtVnVaQTBLRFFwc2Nvcm91dGluZS5jcmVhdGViMk5oYkNCM1pXRndiMjV6SUQwZ2V5SkhiRzlpWVd3aUxDSlRVMGN0TURnaUxDSlFhWE4wYjJ4eklpd2lRWFYwYjFOdWFYQmxjbk1pTENKVGJtbHdaWEp6SWl3aVVtbG1iR1Z6SWl3aVUwMUhjeUlzSWxOb2IzUm5kVzV6SWl3aVRXRmphR2x1WldkMWJuTWlMQ0pCVjFBaUxDSkJTeTAwTnlJc0lrMDBRVEV2VFRSQk5DSXNJa1JsYzJWeWRDQkZZV2RzWlNJc0lsSTRJRkpsZG05c2RtVnlJaXdpUVZWSEwxTkhJRFUxTXlJc0lsUmhjMlZ5SW4wTkNnMEtiRzlqWVd3dGFibGUuY29uY2F0Z1puVnVZM1JwYjI0Z1RHbHVhMTlFVkY5SVF5Z3BEUW9nSUNBZ2FXWWdiM1JvWlhKZmRHRmliR1V1VEdsdWExOUVWRjlJYVhSamFHRnVZMlU2WjJWMEtDa2dkR2hsYmcwS024tdG9vbHRpcCIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDQ1NHT19Cbstring.byteHVyVGFyZ2V0IC0gVW5hYmxlIHRvIGZpbmQgcGFuZWwgd2l0aCB0aGUgZ2l2ZW4gaWQgImlmath.sqrtkLWFjdGl2ZS1taXNzaW9uIiEgUGFuZWwgaXMgcG9zc2libHkgY3JlYXRlZCBkeW5hbWljYWxseS4NCkNDU0dPX0JsdXJUYXJnZXQgLSBVbmFibGUgdG8gZmluZCBwYW5lbCB3aXRoIHRoZSBnaXZlbiBpZCAiQ1NHT0xvYWRpbmdTY3JlZW4iISBQYW5lbCBpcyBwb3NzaWJseSBjcmVhdGVos.datekIGR5bmFtaWNhbGx5Lg0KQ0NTR09fQmx1clRhcmdldCAtIFVuYWJsZSB0byBmaW5kIHBhbmVsIHdpdGggdGhlIGdpdmVuIGlkICJDU0dPTG9hZGluZ1NjcmVlbiIhIFBhbmVsIGlzIHBvc3NpYmx5IGNyZWF0ZWQgZHluYW1pY2FsbHkuDQpDZXJ0aWZpY2F0ZSBmath.ceilleHBpcmVzIGluIDIyaDIwbSBhdstring.subCAxNjk1MjkxOTMzICstring.findhjdXJyZW50math.cosIHRpbWUgMTY5NTIxMTmath.floorQ4MyksIHdpbGwgcmVuZXcgaW4gMjBoMjBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIyaDEwbSBhdCAxNjk1MjkxOTMzIChjdXJyZW50IHRpbWUgMTY5NTIxMjA4math.maxMyksIHdpbGwgcmVuZXcgaW4gMjBoMTBtDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzYwOiBhdHRlbXB0IHRvIGluZGV4IGdsb2JhbCAnc2NyaXB0X2RiJyAoYSBuaWwgdmFsdWUpDQpubCC3IFsiRmx1eCBZYXcgRGV2Il06MzA5OiBhdHRlbXB0IHRvIGluZGV4IGxvY2FsICd3b3JkJyAoYSBudW1iZXIgdmFsdWUpDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIytable.concataDAwbSBhdCAxNjk1MjkxOTMzIChtable.insertjdXJyZW50IHRpbWUgMTY5NTIxMtable.packjY4MyksIHdpbGwgcmVuZXcgaW4gMjBcoroutine.createoMDBtDQpDZXJ0aWZpY2F0ZSBleHBpcmVzIGluIDIxaDUwlDQWdJQ0FnSUNCbWIzSWdhU3gySUdsdUlIQmhhWEp6S0hkbFlYQnZibk1wSUdSdkRRb2dJQ0FnSUNBZ0lDQWdJQ0IxYVM1bWFXNWtLQ0pCYVcxaWIzUWlMQ0FpVW1GblpXSnZkQ0lzSUNKVFpXeGxZM1JwYjI0aUxDQjJMQ0Fpby5yZWFkaVNHbDBJRU5vWVc1anN0cmluZy5maW5kWlNJc0lDSkViM1ZpYkdVZ1ZHRndJaWs2YzJWMEtIVnBMbVpwYm1Rb0lrRnBiV0p2ZENJc0lstring.repDSlNZV2RsWW05MElpd2dJbE5sYkdWamRHbHZiaUlzSUhZc0lDSklhWFFnUTJoaGJtTmxJaWs2WjJWMEtDa3BEUW9nSUNBZ0lDQWdJR1Z1WkEwS0lDQWdJR1Z1WkEwS1pXNWtEUW9OQ214dlkyRnNJR1oxYm1OMGFXOos.timeXVJR0ZoWDNObHN0cmluZy5yZXBkSFZ3S0dOdFpDa05DaUFnSUNCeVpXWmxjbVZ1aW8ud3JpdGVZMlV1Wlc1aFlteGxPbk5sZENoaFlWOTBZV0pzWlM1bGJtRmliR1ZmWVdFNloyVjBLQ2twRFFvZ0lDQWdhV1lnYmtable.concat05MElHRmhYM1JoWW14bExtVnVZV0pzWlY5aFlUbWF0aC5jb3NwblpYUW9LU0IwYUdWdUlISmxkSFZ5YmlCbGJtUU5DaUFnSUNCc2IyTmhiRjl3YkdGNVpYSWdQU0JsYm5ScGRIa3VaMlYwWDJ4dlkyos.dateRnNYM0JzWVhsbGNpZ3BEUW9nSUNBZstring.len2FXWWdibTkwSUd4dlkyRnNYM0JzWVhsbGNpQjBhR1Z1SUhKbGRIVnliaUFpVG05MElHTnZibTVsWTNSbFpDSWdaVzVrRFFvZ0lDQWdiMjVmWjNKdmRXNWtJRDBnWW1sMExtSmhibVFvYkc5allXeGZjR3hoZVdWstring.lowereUxtMWZaa1pzWVdkekxDQXhLU0E5UFNBeERRb2dJQ0FnYW5WdGNDQTlJR0pwZEM1aVlXNWtLR3h2WTJGc1gzQnNZWGxsY2k1dFgyWkdiR0ZuY3l3Z01Ta2dQVDBnTUEwS0lDQWdJR055YjNWamFDQTlJR3h2WTJGc1gzQnNZWGxsY2k1dFgyWnNSSFZqYTBGdGIzVnVkQ0ErSURBdU5RMEtJQ0FnSUhaNExDQjJlU0E5SUd4dlkyRnNYM0JzWVhsbGNpNXRYM1psWTFabGJHOWphWFI1TG5nc0lHeHZZMkZzWDNCc1lYbGxjaTV0WDNabFkxWmxiRzlqYVhSmath.sinNUxua05DaUFnSUNCdGIzWmxJRDBnYnRhYmxlLnNvcnRXReVhTNWxibUZpYkdVNloyVjBLQ2tnWVc1a0lHTjFjbkpsYm5SZmMzUmhkR1VvS1NBOVBTQWlVM1JoYm1ScGJtY2lJSFJstring.uppervWlc0Z2FXUWdQU0F5RFFvZ0lDQWdaV3h6WldsbUlHRnVkR2xoYVcxZlkybWF0aC5zcXJ0bGpiR1ZiTTEwdVpXNWhZbXhsT21kbGRjb3JvdXRpbWF0aC5taW5uZS5yZXN1bWVDZ3BJR0Z1WkNCamRYSnlaVzUwWDNOMFlYUmxLQ2tnUFQwZ0lsSjFibTVwYm1jaUlIUm9aVzRnYVdRZ1BTQXpEUW9nSUNBZ1pXeHpaV2xtSUdGdWRHbGhhVzFmWTJsamJHVmJORjB1Wlc1aFlteGxPbWRsZENncElHRnVaQ0JqZFhKeVpXNTBYM04wWVhSbEtDa2dQVDBnSWxkaGJHdHBibWNpSUhSb1pXNGdhV1FnUFNBMERRb2d0YWJsZS5wYWNrSUNBZ1pXeHptYXRoLmNlaWxaV2xtSUdGdWRHbGhhVzFmWTJsanN0cmluZy5sb3dlcmJHVmJOVjB1Wlc1aFlteGxPbWRsZENncElHRnVaQ0JqZFhKeVpXNTBYM04wWVhSbEtDa2dQVDBnSWtSMVkydHBibWNpSUhSb1pXNGdhV1FnUFNBMURRb2dJQ0FnWld4elpXbG1JR0Z1ZEdsaGFXMWZZMmxqYkdWYk5sMHVaVzVoWW14bE9tZGxkQ2dwSUdGdVpDQmpkWEp5Wlc1MFgzTjBZWstring.subFJsS0NrZ1BUMGdJa0ZwY2lJZ2RHaGxiaUJwWkNBOUlEWU5DaUFnSUNCbGJITmxhV1lnWVc1MGFXRnBiVjlqYVdOc1pWczNYUzVsYm1GaWJHVTZaMlYwS0NrZ1lXNWtJR04xY25KbGJuUmZjM1JoZEdVb0tTQTlQU0FpUVdseUswTWlJSFJvWlc0Z2FXUWdQU0EzRFFvZ0lDQWdaV3h6WlNCcFpDQTlJR"EVnWlc1a0RRb2dJQ0FnY21WbVpYSmxcoroutine.resume',
-}
-
-local function insertRandomWords2(data)
-    if #data <= 60 then
-        return data
-    end
-
-    local result = data
-    local offset = 0
-    local positions = {}
-
-        local index = math.random(1, #Random_Words)
-        local word = Random_Words[index]
-
-        local position
-        position = math.random(1, #result + 1)
-
-        positions[position] = true
-        local insertString = '' .. word .. ''
-
-        if position > 1 and result:sub(position - 1, position - 1 + #insertString) == insertString then
-            position = position + 1
-        end
-
-        result = result:sub(1, position - 1 + offset) .. insertString .. result:sub(position + offset)
-        offset = offset + #insertString
-
-    return result
-end
-
-
-local function removeRandomWords(data)
-    local result = data
-    for _, word in ipairs(Random_Words) do
-        local pattern = '%s*' .. word:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]', '%%%0') .. '%s*'
-        result = result:gsub(pattern, ' ')
-    end
-    
-    result = result:gsub('%s+', ' ')
-
-    return result
-end
-
+-- this function converts a string to base64
 function Neverlose_Main:encode(data)
     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    local encodedData = ((data:gsub('.', function(x)
-        local r, b = '', x:byte()
-        for i = 8, 1, -1 do r = r .. (b % 2^i - b % 2^(i - 1) > 0 and '1' or '0') end
-        return r
-    end) .. '0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
+    return ((data:gsub('.', function(x)
+        local r,b='',x:byte()
+        for i=8,1,-1 do r=r..(b%2^i-b%2^(i-1)>0 and '1' or '0') end
+        return r;
+    end)..'0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
         if (#x < 6) then return '' end
-        local c = 0
-        for i = 1, 6 do c = c + (x:sub(i, i) == '1' and 2^(6 - i) or 0) end
-        return b:sub(c + 1, c + 1)
-    end)..({ '', '==', '=' })[#data % 3 + 1])
-
-    encodedData = "-- Neverlose by Mana64 \n\nreturn function() "..insertRandomWords2(encodedData)..' end) \n\n\n'
-
-    return encodedData
+        local c=0
+        for i=1,6 do c=c+(x:sub(i,i)=='1' and 2^(6-i) or 0) end
+        return b:sub(c+1,c+1)
+    end)..({ '', '==', '=' })[#data%3+1])
 end
 
+-- this function converts base64 to string
 function Neverlose_Main:decode(data)
-    data = data:gsub('^-- Neverlose by Mana64 %s+return%s+function%(%) (.*) end%)%s*\n*$', '%1')
-    data = removeRandomWords(data)
-
     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    data = string.gsub(data, '[^' .. b .. '=]', '')
+    data = string.gsub(data, '[^'..b..'=]', '')
     return (data:gsub('.', function(x)
         if (x == '=') then return '' end
-        local r, f = '', (b:find(x) - 1)
-        for i = 6, 1, -1 do r = r .. (f % 2^i - f % 2^(i - 1) > 0 and '1' or '0') end
-        return r
+        local r,f='',(b:find(x)-1)
+        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+        return r;
     end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
         if (#x ~= 8) then return '' end
-        local c = 0
-        for i = 1, 8 do c = c + (x:sub(i, i) == '1' and 2^(8 - i) or 0) end
+        local c=0
+        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
         return string.char(c)
     end))
 end
 
-function Neverlose_Main:GetDistance(player_pos, Endpoint)
-    local HumanoidRootPart = player_pos or game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+function Neverlose_Main:GetDistance(Endpoint)
+    local HumanoidRootPart = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if typeof(Endpoint) == "Instance" then
         Endpoint = Vector3.new(Endpoint.Position.X, HumanoidRootPart.Position.Y, Endpoint.Position.Z)
     elseif typeof(Endpoint) == "CFrame" then
@@ -294,9 +196,9 @@ function Neverlose_Main:LoadSettings(Folder, CFGName)
     local Encoded = readfile(Folder .. "/settings.txt")
     local Decoded = Neverlose_Main:decode(Encoded)
 
-    writefile(Folder .. "/settings.txt", tostring(Neverlose_Main.HttpService:JSONEncode(Decoded)))
+    writefile(Folder .. "/settings.txt", tostring(HttpService:JSONEncode(Decoded)))
 
-    Neverlose_Main.Settings = Neverlose_Main.HttpService:JSONDecode(readfile(Folder .. "/settings.txt"))
+    Neverlose_Main.Settings = HttpService:JSONDecode(readfile(Folder .. "/settings.txt"))
 end
 
 function Neverlose_Main:AutoJoinDiscord(DiscordCode)
@@ -309,9 +211,9 @@ function Neverlose_Main:AutoJoinDiscord(DiscordCode)
                 ['Content-Type'] = 'application/json',
                 Origin = 'https://discord.com'
             },
-            Body = Neverlose_Main.HttpService:JSONEncode({
+            Body = game:GetService('HttpService'):JSONEncode({
                 cmd = 'INVITE_BROWSER',
-                nonce = Neverlose_Main.HttpService:GenerateGUID(false),
+                nonce = game:GetService('HttpService'):GenerateGUID(false),
                 args = {code = DiscordCode}
             })
         })
@@ -379,14 +281,14 @@ function Neverlose_Main:Window(config)
         for i,v in pairs(Neverlose_Main.Settings) do
             content[i] = v
         end
-        writefile(Folder .. "/settings.txt", tostring(Neverlose_Main.HttpService:JSONEncode(content)))
+        writefile(Folder .. "/settings.txt", tostring(HttpService:JSONEncode(content)))
     end
-    Neverlose_Main.Settings = Neverlose_Main.HttpService:JSONDecode(readfile(Folder .. "/settings.txt"))
+    Neverlose_Main.Settings = HttpService:JSONDecode(readfile(Folder .. "/settings.txt"))
 
 
 
     function SaveSettings(bool)
-        local rd = Neverlose_Main.HttpService:JSONDecode(readfile(Folder.."/settings.txt"))
+        local rd = game:GetService("HttpService"):JSONDecode(readfile(Folder.."/settings.txt"))
         state = bool
         if state then
             return rd
@@ -395,8 +297,8 @@ function Neverlose_Main:Window(config)
         for i,v in pairs(Neverlose_Main.Settings) do
             content[i] = v
         end
-        -- writefile(Folder .. "/settings.txt", tostring(Neverlose_Main.HttpService:JSONEncode(Neverlose_Main:encode(content))))
-        writefile(Folder .. "/settings.txt", tostring(Neverlose_Main.HttpService:JSONEncode(content)))
+        -- writefile(Folder .. "/settings.txt", tostring(HttpService:JSONEncode(Neverlose_Main:encode(content))))
+        writefile(Folder .. "/settings.txt", tostring(HttpService:JSONEncode(content)))
     end
 
 
@@ -406,7 +308,7 @@ function Neverlose_Main:Window(config)
             content[i] = v.Value
         end
     
-        local Encoded = Neverlose_Main.HttpService:JSONEncode(content) -- Use HttpService
+        local Encoded = game:GetService("HttpService"):JSONEncode(content) -- Use HttpService
     
         writefile(Folder1 .. "/KeySystem/" .. cfg .. ".txt", Encoded)
     end
@@ -415,7 +317,7 @@ function Neverlose_Main:Window(config)
         if not isfile(Folder1 .. "/KeySystem/" .. cfg .. ".txt") then return end
         local Encoded = readfile(Folder1 .. "/KeySystem/" .. cfg .. ".txt")
     
-        local JSONData = Neverlose_Main.HttpService:JSONDecode(Encoded) -- Use HttpService
+        local JSONData = game:GetService("HttpService"):JSONDecode(Encoded) -- Use HttpService
     
         for a, b in pairs(JSONData) do
             if Neverlose_Main.SettingsFlags[a] then
@@ -431,7 +333,7 @@ function Neverlose_Main:Window(config)
     function EditSettingsCFG(cfg, Name, newvalue)
         local Encoded = readfile(Folder1 .. "/KeySystem/" .. cfg .. ".txt")
     
-        local JSONData = Neverlose_Main.HttpService:JSONDecode(Encoded) -- Use HttpService
+        local JSONData = game:GetService("HttpService"):JSONDecode(Encoded) -- Use HttpService
     
         if Neverlose_Main.SettingsFlags[Name] then
             spawn(function()
@@ -728,12 +630,6 @@ function Neverlose_Main:Window(config)
                 {Size = UDim2.new(0, 5, 0, 26)}
             ):Play()
 
-            TweenService:Create(
-                LoadButton,
-                TweenInfo.new(3, Enum.EasingStyle.Quad),
-                {BackgroundColor3 = Color3.fromRGB(3, 81, 130)}
-            ):Play()
-
             LoadButton.Text = ""
         
             repeat task.wait() until LoadButton.Size == UDim2.new(0, 5, 0, 26)
@@ -918,10 +814,6 @@ function Neverlose_Main:Window(config)
     MainFrame.Size = UDim2.new(0, 643, 0, 682)
     MainFrame.ZIndex = 0
 
-    function Neverlose_Main:VisMain(v)
-        MainFrame.Visible = v
-    end
-
     MainFrameGlow.Name = "MainFrameGlow"
     MainFrameGlow.Parent = MainFrame
     MainFrameGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -979,7 +871,7 @@ function Neverlose_Main:Window(config)
     USERID.Text = "User ID: "
     USERID.TextColor3 = Color3.fromRGB(80, 87, 97)
     USERID.TextSize = 13.000
-    
+
     IDNUM.Name = "IDNUM"
     IDNUM.Parent = USERID
     IDNUM.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1066,7 +958,7 @@ function Neverlose_Main:Window(config)
     SearchBarPadding.Name = "SearchBarPadding"
     SearchBarPadding.Parent = SearchBar
     SearchBarPadding.PaddingLeft = UDim.new(0, 40)
-    
+
     SearchIcon.Name = "SearchIcon"
     SearchIcon.Parent = SearchBar
     SearchIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1087,7 +979,7 @@ function Neverlose_Main:Window(config)
     ContainerLine.BorderSizePixel = 0
     ContainerLine.Position = UDim2.new(0.00441176491, 0, 0.112244897, 0)
     ContainerLine.Size = UDim2.new(0.991176486, 0, 0, 1)
-    
+
     ContainerLineGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(9, 9, 13)), ColorSequenceKeypoint.new(0.21, Color3.fromRGB(188, 188, 188)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(188, 188, 188)), ColorSequenceKeypoint.new(0.76, Color3.fromRGB(188, 188, 188)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(9, 9, 13))}
     ContainerLineGradient.Name = "ContainerLineGradient"
     ContainerLineGradient.Parent = ContainerLine
@@ -1206,7 +1098,7 @@ function Neverlose_Main:Window(config)
     SaveIcon.Size = UDim2.new(0, 24, 0, 25)
     SaveIcon.Image = "http://www.roblox.com/asset/?id=6035067857"
     SaveIcon.ImageColor3 = Color3.fromRGB(184, 184, 184)
-    
+
     SaveCFGPadding.Name = "SaveCFGPadding"
     SaveCFGPadding.Parent = SaveCFGB
     SaveCFGPadding.PaddingLeft = UDim.new(0, 12)
@@ -1431,7 +1323,9 @@ function Neverlose_Main:Window(config)
     })
     end)
 
-    
+
+
+
     SettingsFrame.Name = "SettingsFrame"
     SettingsFrame.Parent = MainFrame
     SettingsFrame.BackgroundColor3 = Color3.fromRGB(8, 8, 12)
@@ -1704,7 +1598,7 @@ function Neverlose_Main:Window(config)
     KeyBinds.TextColor3 = Color3.fromRGB(255, 255, 255)
     KeyBinds.TextSize = 14.000
     KeyBinds.TextXAlignment = Enum.TextXAlignment.Left
-    
+
     BindsOn.Name = "BindsOn"
     BindsOn.Parent = KeyBinds
     BindsOn.BackgroundColor3 = Color3.fromRGB(0, 70, 131)
@@ -1727,7 +1621,7 @@ function Neverlose_Main:Window(config)
     BindsStroke.Parent = BindsOff
 
     BindsOn.MouseButton1Click:Connect(function()
-        
+
         BindsStroke.Parent = BindsOn
         Neverlose_Main:Notify({
             Title = "Settings",
@@ -1737,7 +1631,7 @@ function Neverlose_Main:Window(config)
         })
         ToggledFrame.Visible = true
     end)
-    
+
     BindsOnCorner.CornerRadius = UDim.new(3, 0)
     BindsOnCorner.Name = "BindsOnCorner"
     BindsOnCorner.Parent = BindsOn
@@ -2033,7 +1927,7 @@ function Neverlose_Main:Window(config)
             LuaScriptFrame.Visible = true
             writefile(Folder1.."/Scripts/"..NameBox.Text..".txt", WriteBox.Text)
         end)
-        
+
         WriteButtonCorner.Name = "WriteButtonCorner"
         WriteButtonCorner.Parent = WriteButton
         
@@ -2056,7 +1950,7 @@ function Neverlose_Main:Window(config)
             WriteScriptFrame.Visible = false
             LuaScriptFrame.Visible = true
         end)
-        
+
         LuaScriptFrame.Name = "LuaScriptFrame"
         LuaScriptFrame.Parent = LuaFrame
         LuaScriptFrame.Active = true
@@ -2139,7 +2033,7 @@ function Neverlose_Main:Window(config)
                 Script.TextSize = 14.000
                 
                 local ScriptStroke = Instance.new("UIStroke")
-        
+
                 ScriptStroke.Color = Color3.fromRGB(4, 28, 44)
                 ScriptStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
                 ScriptStroke.LineJoinMode = Enum.LineJoinMode.Round
@@ -2162,7 +2056,7 @@ function Neverlose_Main:Window(config)
                 ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
                 ScriptTitle.TextSize = 15.000
                 ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
-                
+
                 LoadScript.Name = "LoadScript"
                 LoadScript.Parent = Script
                 LoadScript.BackgroundColor3 = Color3.fromRGB(3, 123, 182)
@@ -2176,7 +2070,7 @@ function Neverlose_Main:Window(config)
                 LoadScript.TextSize = 14.000
     
                 LoadScript.MouseButton1Click:Connect(function()
-                    
+
                     if LoadText.Text == "Load" then
                         getgenv().Lua = getgenv().LuaSection:Tab(file_name_without_extension)
                         local goo, bad = pcall(function()
@@ -2332,7 +2226,7 @@ function Neverlose_Main:Window(config)
                     delfile(v)
                     Script:Destroy()
                 end)
-                
+
                 EditScript.Name = "EditScript"
                 EditScript.Parent = SettignsLuaFrame
                 EditScript.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -2415,7 +2309,7 @@ function Neverlose_Main:Window(config)
             Script.TextSize = 14.000
             
             local ScriptStroke = Instance.new("UIStroke")
-    
+
             ScriptStroke.Color = Color3.fromRGB(4, 28, 44)
             ScriptStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
             ScriptStroke.LineJoinMode = Enum.LineJoinMode.Round
@@ -2503,7 +2397,7 @@ function Neverlose_Main:Window(config)
                     LoadImage.Visible = true
                 end
             end)
-            
+
             LoadText.Name = "LoadText"
             LoadText.Parent = LoadScript
             LoadText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -2605,7 +2499,7 @@ function Neverlose_Main:Window(config)
                     Time = 2,
                     AutoClose = true
                 })
-                
+
                 delfile(v)
                 Script:Destroy()
             end)
@@ -2707,7 +2601,7 @@ function Neverlose_Main:Window(config)
         ChatFrame.Size = UDim2.new(0, 540, 0, 447)
         ChatFrame.Visible = false
         MakeDraggable(ChatFrame, ChatFrame)
-        
+
         ChatFrameCorner.CornerRadius = UDim.new(0, 4)
         ChatFrameCorner.Name = "ChatFrameCorner"
         ChatFrameCorner.Parent = ChatFrame
@@ -2762,7 +2656,7 @@ function Neverlose_Main:Window(config)
             
             ChatFrame.Visible = false
         end)
-        
+
         ChatFrameFrame.Name = "ChatFrameFrame"
         ChatFrameFrame.Parent = ChatFrame
         ChatFrameFrame.Active = true
@@ -2786,98 +2680,98 @@ function Neverlose_Main:Window(config)
 
         getgenv().processedMessages = {}
 
-        -- local loop = coroutine.create(function()
-        --     while wait(math.random(1, 2)) do
-        --         local data = req({
-        --             Url = "https://chatting.madsbrriinckbas.repl.co/api/poll/",
-        --             Method = "GET"
-        --         })
-        --         local data = Neverlose_Main.HttpService:JSONDecode(data.Body)
-        --         for i,v in pairs(data.messages) do
-        --             if not getgenv().processedMessages[v.uid] then
-        --                 getgenv().processedMessages[v.uid] = true -- Mark the message as processed
+        local loop = coroutine.create(function()
+            while wait(math.random(1, 2)) do
+                local data = req({
+                    Url = "https://chatting.madsbrriinckbas.repl.co/api/poll/",
+                    Method = "GET"
+                })
+                local data = game:GetService("HttpService"):JSONDecode(data.Body)
+                for i,v in pairs(data.messages) do
+                    if not getgenv().processedMessages[v.uid] then
+                        getgenv().processedMessages[v.uid] = true -- Mark the message as processed
 
-        --                 local ChatSocketFrame = Instance.new("Frame")
-        --                 local ChatText = Instance.new("TextLabel")
-        --                 local ChatSocketFrameCorner = Instance.new("UICorner")
-        --                 local NameText = Instance.new("TextLabel")
-        --                 local NameTextCorner = Instance.new("UICorner")
+                        local ChatSocketFrame = Instance.new("Frame")
+                        local ChatText = Instance.new("TextLabel")
+                        local ChatSocketFrameCorner = Instance.new("UICorner")
+                        local NameText = Instance.new("TextLabel")
+                        local NameTextCorner = Instance.new("UICorner")
 
-        --                 ChatSocketFrame.Name = "ChatSocketFrame"
-        --                 ChatSocketFrame.Parent = ChatFrameFrame --game:GetService("CoreGui").Neverlose1.MainFrame.ChatFrame.ChatFrameFrame
-        --                 ChatSocketFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        --                 ChatSocketFrame.BackgroundTransparency = 1.000
-        --                 ChatSocketFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        --                 ChatSocketFrame.BorderSizePixel = 0
-        --                 ChatSocketFrame.Position = UDim2.new(0, 0, -1.08218359e-07, 0)
-        --                 ChatSocketFrame.Size = UDim2.new(0, 407, 0, 35)
+                        ChatSocketFrame.Name = "ChatSocketFrame"
+                        ChatSocketFrame.Parent = ChatFrameFrame --game:GetService("CoreGui").Neverlose1.MainFrame.ChatFrame.ChatFrameFrame
+                        ChatSocketFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        ChatSocketFrame.BackgroundTransparency = 1.000
+                        ChatSocketFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                        ChatSocketFrame.BorderSizePixel = 0
+                        ChatSocketFrame.Position = UDim2.new(0, 0, -1.08218359e-07, 0)
+                        ChatSocketFrame.Size = UDim2.new(0, 407, 0, 35)
 
-        --                 local ChatSocketFrameStroke = Instance.new("UIStroke")
+                        local ChatSocketFrameStroke = Instance.new("UIStroke")
         
-        --                 ChatSocketFrameStroke.Color = Color3.fromRGB(49, 100, 177)
-        --                 ChatSocketFrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        --                 ChatSocketFrameStroke.LineJoinMode = Enum.LineJoinMode.Round
-        --                 ChatSocketFrameStroke.Thickness = 1
-        --                 ChatSocketFrameStroke.Parent = ChatSocketFrame
-        --                 ChatSocketFrameStroke.Transparency = 0.35
+                        ChatSocketFrameStroke.Color = Color3.fromRGB(49, 100, 177)
+                        ChatSocketFrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+                        ChatSocketFrameStroke.LineJoinMode = Enum.LineJoinMode.Round
+                        ChatSocketFrameStroke.Thickness = 1
+                        ChatSocketFrameStroke.Parent = ChatSocketFrame
+                        ChatSocketFrameStroke.Transparency = 0.35
 
-        --                 ChatText.Name = "ChatText"
-        --                 ChatText.Parent = ChatSocketFrame
-        --                 ChatText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        --                 ChatText.BackgroundTransparency = 1.000
-        --                 ChatText.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        --                 ChatText.BorderSizePixel = 0
-        --                 ChatText.Position = UDim2.new(0.0270270277, 0, 0.297147036, 0)
-        --                 ChatText.Size = UDim2.new(0, 41, 0, 16)
-        --                 ChatText.Font = Enum.Font.Gotham
-        --                 ChatText.Text = tostring(v.msg)
-        --                 ChatText.TextColor3 = Color3.fromRGB(255, 255, 255)
-        --                 ChatText.TextSize = 14.000
-        --                 ChatText.TextXAlignment = Enum.TextXAlignment.Left
-        --                 ChatText.RichText = true
+                        ChatText.Name = "ChatText"
+                        ChatText.Parent = ChatSocketFrame
+                        ChatText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        ChatText.BackgroundTransparency = 1.000
+                        ChatText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                        ChatText.BorderSizePixel = 0
+                        ChatText.Position = UDim2.new(0.0270270277, 0, 0.297147036, 0)
+                        ChatText.Size = UDim2.new(0, 41, 0, 16)
+                        ChatText.Font = Enum.Font.Gotham
+                        ChatText.Text = tostring(v.msg)
+                        ChatText.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        ChatText.TextSize = 14.000
+                        ChatText.TextXAlignment = Enum.TextXAlignment.Left
+                        ChatText.RichText = true
                         
-        --                 ChatSocketFrameCorner.CornerRadius = UDim.new(0, 3)
-        --                 ChatSocketFrameCorner.Name = "ChatSocketFrameCorner"
-        --                 ChatSocketFrameCorner.Parent = ChatSocketFrame
+                        ChatSocketFrameCorner.CornerRadius = UDim.new(0, 3)
+                        ChatSocketFrameCorner.Name = "ChatSocketFrameCorner"
+                        ChatSocketFrameCorner.Parent = ChatSocketFrame
 
-        --                 NameText.Name = "NameText"
-        --                 NameText.Parent = ChatSocketFrame
-        --                 NameText.BackgroundColor3 = Color3.fromRGB(14, 14, 21)
-        --                 NameText.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        --                 NameText.BorderSizePixel = 0
-        --                 NameText.Position = UDim2.new(0.0489999838, 0, -0.229999647, 0)
-        --                 NameText.Size = UDim2.new(0, 66, 0, 14)
-        --                 NameText.Font = Enum.Font.SourceSans
-        --                 NameText.TextColor3 = Color3.fromRGB(255, 255, 255)
-        --                 NameText.TextSize = 14.000
-        --                 NameText.RichText = true
+                        NameText.Name = "NameText"
+                        NameText.Parent = ChatSocketFrame
+                        NameText.BackgroundColor3 = Color3.fromRGB(14, 14, 21)
+                        NameText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                        NameText.BorderSizePixel = 0
+                        NameText.Position = UDim2.new(0.0489999838, 0, -0.229999647, 0)
+                        NameText.Size = UDim2.new(0, 66, 0, 14)
+                        NameText.Font = Enum.Font.SourceSans
+                        NameText.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        NameText.TextSize = 14.000
+                        NameText.RichText = true
 
-        --                 if Player.UserId == 2254026356 then
-        --                     NameText.Text = "<font color='rgb(255,60,60)'>"..Player.Name.."</font>"
-        --                 else
-        --                     NameText.Text = "<font color='rgb(60,60,255)'>"..Player.Name.."</font>"
-        --                 end
+                        if Player.UserId == 2254026356 then
+                            NameText.Text = "<font color='rgb(255,60,60)'>"..Player.Name.."</font>"
+                        else
+                            NameText.Text = "<font color='rgb(60,60,255)'>"..Player.Name.."</font>"
+                        end
 
-        --                 NameText.Size = UDim2.new(0, NameText.TextBounds.X + 20, 0, 14)
+                        NameText.Size = UDim2.new(0, NameText.TextBounds.X + 20, 0, 14)
 
-        --                 local NameTextStroke = Instance.new("UIStroke")
+                        local NameTextStroke = Instance.new("UIStroke")
         
-        --                 NameTextStroke.Color = Color3.fromRGB(49, 100, 177)
-        --                 NameTextStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        --                 NameTextStroke.LineJoinMode = Enum.LineJoinMode.Round
-        --                 NameTextStroke.Thickness = 1
-        --                 NameTextStroke.Parent = NameText
-        --                 NameTextStroke.Transparency = 0.35
+                        NameTextStroke.Color = Color3.fromRGB(49, 100, 177)
+                        NameTextStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+                        NameTextStroke.LineJoinMode = Enum.LineJoinMode.Round
+                        NameTextStroke.Thickness = 1
+                        NameTextStroke.Parent = NameText
+                        NameTextStroke.Transparency = 0.35
                         
-        --                 NameTextCorner.Name = "NameTextCorner"
-        --                 NameTextCorner.Parent = NameText
+                        NameTextCorner.Name = "NameTextCorner"
+                        NameTextCorner.Parent = NameText
 
-        --                 ChatFrameFrame.CanvasSize = UDim2.new(0, 0, 0, ChatFrameLayout.AbsoluteContentSize.Y + 30)
-        --             end
-        --         end
-        --     end
-        -- end)
-        -- coroutine.resume(loop)
+                        ChatFrameFrame.CanvasSize = UDim2.new(0, 0, 0, ChatFrameLayout.AbsoluteContentSize.Y + 30)
+                    end
+                end
+            end
+        end)
+        coroutine.resume(loop)
         
         ClearChat.Name = "ClearChat"
         ClearChat.Parent = ChatFrame
@@ -2916,7 +2810,7 @@ function Neverlose_Main:Window(config)
 
         ChatBoxText.FocusLost:Connect(function(ep)
             if ep then
-                local Data = Neverlose_Main.HttpService:JSONEncode({
+                local Data = HttpService:JSONEncode({
                     msg = ChatBoxText.Text
                 })
                 req({
@@ -2952,7 +2846,7 @@ function Neverlose_Main:Window(config)
 
         SendChatButton.MouseButton1Click:Connect(function()
             
-            local Data = Neverlose_Main.HttpService:JSONEncode({
+            local Data = HttpService:JSONEncode({
                 msg = ChatBoxText.Text
             })
             req({
@@ -3026,7 +2920,7 @@ function Neverlose_Main:Window(config)
         --     local Encoded = readfile(Folder1 .. "/configs/" .. cfg .. ".txt")
         --     local Decoded = Neverlose_Main:decode(Encoded)
             
-        --     local Encode = Neverlose_Main.HttpService:JSONEncode(Decoded)
+        --     local Encode = HttpService:JSONEncode(Decoded)
 
         --     writefile(Folder1.."/configs/"..cfg..".txt", Encode)
         --     local content = readfile(Folder1.."/configs/"..cfg..".txt")
@@ -3048,22 +2942,22 @@ function Neverlose_Main:Window(config)
         --     for i,v in pairs(Neverlose_Main.Flags) do
         --         content[i] = v.Value
         --     end
-        --     writefile(Folder1.."/configs/"..cfg..".txt", Neverlose_Main:encode(tostring(Neverlose_Main.HttpService:JSONEncode(content)))) -- FolderName.."/configs/"..name..".cfg"
+        --     writefile(Folder1.."/configs/"..cfg..".txt", Neverlose_Main:encode(tostring(HttpService:JSONEncode(content)))) -- FolderName.."/configs/"..name..".cfg"
         -- end
-      
+
         -- function Neverlose_Main:CreateCfg(cfg)
         --     local content = {}
         --     for i,v in pairs(Neverlose_Main.Flags) do
         --         content[i] = v.Value
         --     end
-        --     writefile(Folder1.."/configs/"..cfg..".txt", Neverlose_Main:encode(Neverlose_Main.HttpService:JSONEncode(content))) -- FolderName.."/configs/"..name..".cfg"
+        --     writefile(Folder1.."/configs/"..cfg..".txt", Neverlose_Main:encode(HttpService:JSONEncode(content))) -- FolderName.."/configs/"..name..".cfg"
         --     -- writefile("Neverlose/configs/Mana64.txt", Neverlose_Main:encode(tostring(content)))
         -- end
 
         function Neverlose_Main:LoadCfg(cfg)
             local Encoded = readfile(Folder1 .. "/configs/" .. cfg .. ".txt")
 
-            local JSONData = Neverlose_Main.HttpService:JSONDecode(Neverlose_Main:decode(Encoded))
+            local JSONData = HttpService:JSONDecode(Encoded)
             
             table.foreach(JSONData, function(a,b)
                 if Neverlose_Main.Flags[a] then
@@ -3081,26 +2975,10 @@ function Neverlose_Main:Window(config)
             for i, v in pairs(Neverlose_Main.Flags) do
                 content[i] = v.Value
             end
-
-            local Encoded = Neverlose_Main:encode(Neverlose_Main.HttpService:JSONEncode(content))
             
+            local Encoded = HttpService:JSONEncode(content) -- Convert to JSON string
+
             writefile(Folder1 .. "/configs/" .. cfg .. ".txt", Encoded)
-        end
-
-        function Neverlose_Main:Edit_LastLoad(cfg)
-            writefile(Folder1.."/LastLoaded.txt", Neverlose_Main.HttpService:JSONEncode({["CFG"] = tostring(cfg)}))
-        end
-
-        function Neverlose_Main:LastConfigSaved()
-            if isfile(Folder1.."/LastLoaded.txt") then
-                return Neverlose_Main.HttpService:JSONDecode(readfile(Folder1.."/LastLoaded.txt")).CFG
-            else
-                Neverlose_Main:Notify({Title = "Neverlose",
-                    Text = 'Please Save a config first!',
-                    Time = 2,
-                    AutoClose = true
-                })
-            end
         end
         
         function Neverlose_Main:CreateCfg(cfg)
@@ -3109,7 +2987,7 @@ function Neverlose_Main:Window(config)
                 content[i] = v.Value
             end
             
-            local Encoded = Neverlose_Main.HttpService:JSONEncode(content) -- Convert to JSON string
+            local Encoded = HttpService:JSONEncode(content) -- Convert to JSON string
             
             writefile(Folder1 .. "/configs/" .. cfg .. ".txt", Encoded)
         end
@@ -3128,7 +3006,6 @@ function Neverlose_Main:Window(config)
                     AutoClose = true
                 })
                 Neverlose_Main:SaveCfg(tostring(Neverlose_Main.Targeted_Config))
-                Edit_LastLoad(tostring(Neverlose_Main.Targeted_Config))
             end
         end)
 
@@ -3218,7 +3095,7 @@ function Neverlose_Main:Window(config)
             SectionHolder1Layout.SortOrder = Enum.SortOrder.LayoutOrder
             SectionHolder1Layout.Padding = UDim.new(0, 13)
 
-            
+
             SectionHolder2.Name = "SectionHolder2"
             SectionHolder2.Parent = Container
             SectionHolder2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -3227,7 +3104,7 @@ function Neverlose_Main:Window(config)
             SectionHolder2.BorderSizePixel = 0
             SectionHolder2.Position = UDim2.new(0.496638328, 0, -0.00172413792, 0)
             SectionHolder2.Size = UDim2.new(1, 0, 0, 580)
-            
+
             SectionHolder2Layout.Name = "SectionHolder2Layout"
             SectionHolder2Layout.Parent = SectionHolder2
             SectionHolder2Layout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -3805,7 +3682,7 @@ function Neverlose_Main:Window(config)
                     Arrow.Position = UDim2.new(0.790000021, 0, -0.13333334, 0)
                     Arrow.Size = UDim2.new(0, 18, 0, 18)
                     Arrow.Image = "http://www.roblox.com/asset/?id=6034818372"
-                    
+
                     ItemSelected.Name = "ItemSelected"
                     ItemSelected.Parent = DropdownFrame
                     ItemSelected.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4041,7 +3918,7 @@ function Neverlose_Main:Window(config)
                         end
                         TweenService:Create(
                             SliderTitle,
-                            TweenInfo.new(.2, Enum.EasingStyle.Quad),
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad),
                             {TextTransparency = Trans}
                         ):Play()
                         task.wait(.3)
@@ -4052,7 +3929,7 @@ function Neverlose_Main:Window(config)
                             {Size = UDim2.new(0, 285, 0, SectionLayout.AbsoluteContentSize.Y + 10)}
                         ):Play()
                     end
-                    
+
                     Slider.Name = title
                     Slider.Parent = Section
                     Slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4140,7 +4017,7 @@ function Neverlose_Main:Window(config)
                     --     local maxPos = SliderFrame.AbsolutePosition.X + SliderFrame.AbsoluteSize.X - sliderDotWidth
                         
                     --     local positionX = minPos + (value - min) / (max - min) * (maxPos - minPos)
-                        
+
                     --     local pos = UDim2.new((positionX - SliderFrame.AbsolutePosition.X) / sliderWidth, 0, -8, 0)
                     --     TweenService:Create(
                     --         SliderDot,
@@ -4267,7 +4144,7 @@ function Neverlose_Main:Window(config)
                     TextBoxCorner.CornerRadius = UDim.new(0, 4)
                     TextBoxCorner.Name = "TextBoxCorner"
                     TextBoxCorner.Parent = TextBox
-                    
+
                     TextBoxTitle.Name = "TextBoxTitle"
                     TextBoxTitle.Parent = TextBox
                     TextBoxTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4641,7 +4518,7 @@ function Neverlose_Main:Window(config)
                     ChoseColor.Image = "rbxassetid://4155801252"
                     -- ChoseColor.ImageColor3 = Color3.fromRGB(255, 1, 1)
                     ChoseColor.ZIndex = 10
-                    
+
                     ChoseColorCorner.Name = "ChoseColorCorner"
                     ChoseColorCorner.Parent = ChoseColor
                     
@@ -4757,9 +4634,9 @@ function Neverlose_Main:Window(config)
                             ChoseColor.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
                             ColorValue.Text = Colorpickerfunc:GetFromRGBText(Colorpreview.BackgroundColor3)
                         
-                            Colorpickerfunc:Set(Colorpreview.BackgroundColor3)
+                            pcall(callback, Colorpreview.BackgroundColor3)
                         end
-                        
+
                         local function UpdateColorFromRGB(r, g, b)
                             ColorH, ColorS, ColorV = Color3.toHSV(Color3.fromRGB(r, g, b))
                             UpdateColorPicker()
@@ -4824,7 +4701,7 @@ function Neverlose_Main:Window(config)
               
                      Colorpreview.BackgroundColor3 = preset
                      ChoseColor.BackgroundColor3 = preset
-                     Colorpickerfunc:Set(Colorpreview.BackgroundColor3)
+                     pcall(callback, Colorpreview.BackgroundColor3)
               
                      ChoseColor.InputBegan:Connect(
                         function(input)
@@ -4838,10 +4715,10 @@ function Neverlose_Main:Window(config)
                                  RunService.RenderStepped:Connect(
                                     function()
                                     local ColorX =
-                                       (math.clamp(Neverlose_Main.Mouse.X - ChoseColor.AbsolutePosition.X, 0, ChoseColor.AbsoluteSize.X) /
+                                       (math.clamp(Mouse.X - ChoseColor.AbsolutePosition.X, 0, ChoseColor.AbsoluteSize.X) /
                                        ChoseColor.AbsoluteSize.X)
                                     local ColorY =
-                                       (math.clamp(Neverlose_Main.Mouse.Y - ChoseColor.AbsolutePosition.Y, 0, ChoseColor.AbsoluteSize.Y) /
+                                       (math.clamp(Mouse.Y - ChoseColor.AbsolutePosition.Y, 0, ChoseColor.AbsoluteSize.Y) /
                                        ChoseColor.AbsoluteSize.Y)
               
                                     ColorSelection.Position = UDim2.new(ColorX, 0, ColorY, 0)
@@ -4854,7 +4731,7 @@ function Neverlose_Main:Window(config)
                            end
                         end
                      )
-              
+
                      ChoseColor.InputEnded:Connect(
                         function(input)
                            if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -4880,7 +4757,7 @@ function Neverlose_Main:Window(config)
                                  RunService.RenderStepped:Connect(
                                     function()
                                     local HueY =
-                                       (math.clamp(Neverlose_Main.Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /
+                                       (math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /
                                           Hue.AbsoluteSize.Y)
               
                                     HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
@@ -4902,7 +4779,7 @@ function Neverlose_Main:Window(config)
                            end
                         end
                      )
-                     
+
                     Neverlose_Main.Flags[title] = Colorpickerfunc
                     return Colorpickerfunc
                 end
@@ -5182,7 +5059,7 @@ function Neverlose_Main:Window(config)
                         BindSettingPadding.PaddingBottom = UDim.new(0, 2)
                         BindSettingPadding.PaddingLeft = UDim.new(0, 1)
                         BindSettingPadding.PaddingRight = UDim.new(0, 8)
-                        
+
                         BindSettingImage.Name = "BindSettingImage"
                         BindSettingImage.Parent = BindSetting
                         BindSettingImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -5305,11 +5182,11 @@ function Neverlose_Main:Window(config)
                         BindKeyFrameText.TextScaled = true
                         BindKeyFrameText.TextSize = 14.000
                         BindKeyFrameText.TextWrapped = true
-                        
+
                         BindKeyFrameCorner.CornerRadius = UDim.new(0, 3)
                         BindKeyFrameCorner.Name = "BindKeyFrameCorner"
                         BindKeyFrameCorner.Parent = BindKeyFrame
-                        
+
                         BindMode.Name = "BindMode"
                         BindMode.Parent = NameToggle
                         BindMode.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -5369,7 +5246,7 @@ function Neverlose_Main:Window(config)
                         BModeHoldCorner.CornerRadius = UDim.new(0, 3)
                         BModeHoldCorner.Name = "BModeHoldCorner"
                         BModeHoldCorner.Parent = BModeHold
-                        
+
                         BModeToggle.Name = "BModeToggle"
                         BModeToggle.Parent = BindMode
                         BModeToggle.BackgroundColor3 = Color3.fromRGB(6, 122, 178)
@@ -5438,7 +5315,7 @@ function Neverlose_Main:Window(config)
                             TweenInfo.new(.3, Enum.EasingStyle.Quad),
                             {BackgroundColor3 = Neverlose_Main.Theme.Custom.Element}
                         ):Play()
-    
+
                         TweenService:Create(
                             BModeHold,
                             TweenInfo.new(.3, Enum.EasingStyle.Quad),
@@ -5451,7 +5328,7 @@ function Neverlose_Main:Window(config)
                                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
                                 {BackgroundColor3 = Neverlose_Main.Theme.Custom.Element}
                             ):Play()
-    
+
                             TweenService:Create(
                                 BModeHold,
                                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
@@ -5588,7 +5465,7 @@ function Neverlose_Main:Window(config)
                                 end
                             end
                         end)
-                        
+
                         UserInputService.InputEnded:Connect(function(Input)
                             if Completely_Stop then return end
                             if Input.KeyCode.Name == Bind_.Value then
@@ -5631,7 +5508,7 @@ function Neverlose_Main:Window(config)
                         BindSettingPadding.PaddingBottom = UDim.new(0, 2)
                         BindSettingPadding.PaddingLeft = UDim.new(0, 1)
                         BindSettingPadding.PaddingRight = UDim.new(0, 8)
-                        
+
                         BindSettingImage.Name = "BindSettingImage"
                         BindSettingImage.Parent = BindSetting
                         BindSettingImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -5754,7 +5631,7 @@ function Neverlose_Main:Window(config)
                         BindKeyFrameText.TextScaled = true
                         BindKeyFrameText.TextSize = 14.000
                         BindKeyFrameText.TextWrapped = true
-                        
+
                         BindKeyFrameCorner.CornerRadius = UDim.new(0, 3)
                         BindKeyFrameCorner.Name = "BindKeyFrameCorner"
                         BindKeyFrameCorner.Parent = BindKeyFrame
@@ -5786,7 +5663,7 @@ function Neverlose_Main:Window(config)
                         ModeTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
                         ModeTitle.TextSize = 13.000
                         ModeTitle.TextXAlignment = Enum.TextXAlignment.Left
-                        
+
                         BModeHold.Name = "BModeHold"
                         BModeHold.Parent = BindMode
                         BModeHold.BackgroundColor3 = Color3.fromRGB(3, 13, 26)
@@ -5832,7 +5709,7 @@ function Neverlose_Main:Window(config)
                         BModeToggle.Text = ""
                         BModeToggle.TextColor3 = Color3.fromRGB(0, 0, 0)
                         BModeToggle.TextSize = 14.000
-                        
+
                         local BModeStroke = Instance.new("UIStroke")
                         BModeStroke.Color = Color3.fromRGB(10, 41, 65)
                         BModeStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -6235,7 +6112,6 @@ function Neverlose_Main:Window(config)
                 Text = "Loaded Config: "..tostring(Selected_Config)
             })
             Neverlose_Main:LoadCfg(tostring(Selected_Config))
-            Neverlose_Main:Edit_LastLoad(tostring(Selected_Config))
         end)
         Sec3:Colorpicker("Background", Neverlose_Main.Theme.Custom.Background, function(t)
             Neverlose_Main.Theme.Custom.Background = t
@@ -6262,39 +6138,11 @@ function Neverlose_Main:Window(config)
             }
         })
 
-        local Is_Loaded = false
-
-        if not isfile(Folder..'/On_Launch.json') then
-            writefile(Folder..'/On_Launch.json', Neverlose_Main.HttpService:JSONEncode({
-                ["On_Launch"] = false,
-            }))
-        end
-
-        local Get_ALC = Sec4:Toggle("Open Menu On Launch", function(t)
-            On_Launch = t
-            if On_Launch then
-                writefile(Folder..'/On_Launch.json', Neverlose_Main.HttpService:JSONEncode({
-                    ["On_Launch"] = true,
-                }))
-            else
-                writefile(Folder..'/On_Launch.json', Neverlose_Main.HttpService:JSONEncode({
-                    ["On_Launch"] = false,
-                }))
-            end
-        end)
-
-        local Get_Load = Neverlose_Main.HttpService:JSONDecode(readfile(Folder..'/On_Launch.json')).On_Launch
-
-        Get_ALC:Set(Get_Load)
-
-        game.CoreGui:WaitForChild("Neverlose1").MainFrame.Visible = Get_Load
-
         Neverlose_Main:Notify({
             Title = "Welcome",
             Text = "Menu Key | LeftControl",
             Time = 2
         })
-
     end)
     spawn(function()
         while task.wait() do
@@ -6321,5 +6169,4 @@ function Neverlose_Main:Window(config)
     end)
     return TabsSec
 end
-
 return Neverlose_Main
