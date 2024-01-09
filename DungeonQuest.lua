@@ -10,7 +10,7 @@ _G.extremelyFast = true -- makes the ai think exponentially faster, but might la
 
 -- Lobby Settings
 _G.maxWaitTimeInLobby = 0 -- this is how long itll randomly walk around for before going into a dungeon 
-_G.collect_daily_reward = true
+_G.collect_daily_reward = false
 
 -- Dungeon Choosing Settings
 _G.auto_join_dungeon = true
