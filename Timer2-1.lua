@@ -31,7 +31,6 @@ end
 
 ---- getGameTables
 local function getGameTables()
-    local MissionNpcs = {}
     local Islands = {}
     local TravelPoints = {}
     local Achievements = {}
@@ -70,7 +69,7 @@ local function getGameTables()
         end
     end
 
-    return MissionNpcs, Islands, TravelPoints, Achievements
+    return Islands, TravelPoints, Achievements
 end
 
 ---- getTrees
