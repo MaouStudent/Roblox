@@ -267,7 +267,7 @@ local AutoSellVar = FarmSection:Toggle("AutoSell", function(t)
         end
     end)
 end)
-AutoSellVar:Set(_G.AutoSell)
+AutoSellVar:Set(false)
 
 -- AutoFarmTrees Toggle
 local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
@@ -288,7 +288,7 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
         end
     end)
 end)
-AutoFarmTreesVar:Set(_G.AutoFarmTrees)
+AutoFarmTreesVar:Set(false)
 
 -- AutoFarmOres Toggle
 local AutoFarmOresVar = FarmSection:Toggle("AutoFarmOres", function(t)
@@ -308,7 +308,7 @@ local AutoFarmOresVar = FarmSection:Toggle("AutoFarmOres", function(t)
     end)
 
 end)
-AutoFarmOresVar:Set(_G.AutoFarmOres)
+AutoFarmOresVar:Set(false)
 
 -- AutoFarmMegaTrees Toggle
 local AutoFarmMegaTreesVar = FarmSection:Toggle("AutoFarmMegaTrees", function(t)
@@ -330,7 +330,7 @@ local AutoFarmMegaTreesVar = FarmSection:Toggle("AutoFarmMegaTrees", function(t)
     end)
 
 end)
-AutoFarmMegaTreesVar:Set(_G.AutoFarmMegaTrees)
+AutoFarmMegaTreesVar:Set(false)
 
 -- AutoFarmMegaOres Toggle
 local AutoFarmMegaOresVar = FarmSection:Toggle("AutoFarmMegaOres", function(t)
@@ -350,7 +350,7 @@ local AutoFarmMegaOresVar = FarmSection:Toggle("AutoFarmMegaOres", function(t)
     end)
 
 end)
-AutoFarmMegaOresVar:Set(_G.AutoFarmMegaOres)
+AutoFarmMegaOresVar:Set(false)
 
 -- AutoFarmFish Toggle
 local AutoFarmFishVar = FarmSection:Toggle("AutoFarmFish (only island fish)", function(t)
@@ -366,7 +366,7 @@ local AutoFarmFishVar = FarmSection:Toggle("AutoFarmFish (only island fish)", fu
     end)
 
 end)
-AutoFarmFishVar:Set(_G.AutoFarmFish)
+AutoFarmFishVar:Set(false)
 
 -- AutoClaimOnline Toggle
 local AutoClaimOnlineVar = Misc:Toggle("AutoClaimOnline", function(t)
@@ -378,7 +378,7 @@ local AutoClaimOnlineVar = Misc:Toggle("AutoClaimOnline", function(t)
         end
     end)
 end)
-AutoClaimOnlineVar:Set(_G.AutoClaimOnline)
+AutoClaimOnlineVar:Set(false)
 
 -- AutoClaimAchivements Toggle
 local AutoClaimAchivementsVar = Misc:Toggle("AutoClaimAchivements", function(t)
@@ -390,7 +390,7 @@ local AutoClaimAchivementsVar = Misc:Toggle("AutoClaimAchivements", function(t)
         end
     end)
 end)
-AutoClaimAchivementsVar:Set(_G.AutoClaimAchivements)
+AutoClaimAchivementsVar:Set(false)
 
 -- AutoChest Toggle
 local AutoChestVar = Misc:Toggle("AutoChest", function(t)
@@ -409,7 +409,7 @@ local AutoChestVar = Misc:Toggle("AutoChest", function(t)
         end
     end)
 end)
-AutoChestVar:Set(_G.AutoChest)
+AutoChestVar:Set(false)
 
 -- Misc Dropdown Select Teleport to Game Table
 Misc:Dropdown("Select Islands to Teleport", Islands, function(t)
