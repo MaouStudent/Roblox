@@ -385,7 +385,7 @@ end)
 AutoFarmFishVar:Set(false)
 
 -- AutoClaimOnline Toggle
-local AutoClaimOnlineVar = Misc:Toggle("AutoClaimOnline", function(t)
+local AutoClaimOnlineVar = FarmSection:Toggle("AutoClaimOnline", function(t)
     _G.AutoClaimOnline = t
     spawn(function()
         while _G.AutoClaimOnline do
@@ -397,7 +397,7 @@ end)
 AutoClaimOnlineVar:Set(false)
 
 -- AutoClaimAchivements Toggle
-local AutoClaimAchivementsVar = Misc:Toggle("AutoClaimAchivements", function(t)
+local AutoClaimAchivementsVar = FarmSection:Toggle("AutoClaimAchivements", function(t)
     _G.AutoClaimAchivements = t
     spawn(function()
         while _G.AutoClaimAchivements do
@@ -409,7 +409,7 @@ end)
 AutoClaimAchivementsVar:Set(false)
 
 -- AutoChest Toggle
-local AutoChestVar = Misc:Toggle("AutoChest", function(t)
+local AutoChestVar = FarmSection:Toggle("AutoChest", function(t)
     _G.AutoChest = t
     spawn(function()
         while _G.AutoChest do
