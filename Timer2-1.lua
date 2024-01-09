@@ -233,7 +233,7 @@ MissionNpcs, Islands, TravelPoints, Achievements = getGameTables()
 --  ======================= UI =======================  --
 -- Loadstring
 local Neverlose_Main = loadstring(game:HttpGet(
-    "https://raw.githubusercontent.com/MaouStudent/Roblox/main/Lib/Neverlose-UI.lua"))()
+    "https://raw.githubusercontent.com/Mana42138/Neverlose-UI/main/Source.lua"))()
 
 -- Creating Window
 local Win = Neverlose_Main:Window({
