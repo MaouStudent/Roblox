@@ -320,7 +320,7 @@ local AutoFarmMegaTreesVar = FarmSection:Toggle("AutoFarmMegaTrees", function(t)
                     end
 
                     for i = 1, 100 do
-                        Communication.HitMegaTree:FireServer(tree.id)
+                        Communication.HitTree:FireServer(tree.id)
                     end
                     task.wait()
                 end
@@ -346,7 +346,7 @@ local AutoFarmMegaOresVar = FarmSection:Toggle("AutoFarmMegaOres", function(t)
                         break
                     end
 
-                    Communication.HitMegaOre:FireServer(ore.id)
+                    Communication.HitOre:FireServer(ore.id)
                     task.wait()
                 end
             end)
