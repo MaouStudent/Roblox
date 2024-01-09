@@ -278,6 +278,10 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
             pcall(function()
                 local tress = getTrees()
                 for _, tree in ipairs(tress) do
+                    if not _G.AutoFarmTrees then
+                        break
+                    end
+
                     Communication.HitTree:FireServer(tree.id)
                     task.wait()
                 end
@@ -297,6 +301,10 @@ local AutoFarmOresVar = FarmSection:Toggle("AutoFarmOres", function(t)
             pcall(function()
                 local ores = getOres()
                 for _, ore in ipairs(ores) do
+                    if not _G.AutoFarmOres then
+                        break
+                    end
+
                     Communication.HitOre:FireServer(ore.id)
                     task.wait()
                 end
@@ -317,6 +325,11 @@ local AutoFarmMegaTreesVar = FarmSection:Toggle("AutoFarmMegaTrees", function(t)
             pcall(function()
                 local trees = getMegaTrees()
                 for _, tree in ipairs(trees) do
+
+                    if not _G.AutoFarmMegaTrees then
+                        break
+                    end
+
                     for i = 1, 100 do
                         Communication.HitMegaTree:FireServer(tree.id)
                     end
@@ -339,6 +352,11 @@ local AutoFarmMegaOresVar = FarmSection:Toggle("AutoFarmMegaOres", function(t)
             pcall(function()
                 local ores = getMegaOres()
                 for _, ore in ipairs(ores) do
+
+                    if not _G.AutoFarmMegaOres then
+                        break
+                    end
+
                     Communication.HitMegaOre:FireServer(ore.id)
                     task.wait()
                 end
@@ -409,15 +427,18 @@ local AutoChestVar = Misc:Toggle("AutoChest", function(t)
 end)
 AutoChestVar:Set(false)
 
+-- Misc:Section
+local MiscS = Misc:Section("Misc")
+
 -- Misc Dropdown Select Teleport to Game Table
-Misc:Dropdown("Select Islands to Teleport", Islands, function(t)
+MiscS:Dropdown("Select Islands to Teleport", Islands, function(t)
     LocalPlayer.Character.HumanoidRootPart.CFrame = Islands[t].part.CFrame
 end)
 
-Misc:Dropdown("Select TravelPoints to Teleport", TravelPoints, function(t)
+MiscS:Dropdown("Select TravelPoints to Teleport", TravelPoints, function(t)
     LocalPlayer.Character.HumanoidRootPart.CFrame = TravelPoints[t].part.CFrame
 end)
 
-Misc:Dropdown("Select MissionNpcs to Teleport", MissionNpcs, function(t)
+MiscS:Dropdown("Select MissionNpcs to Teleport", MissionNpcs, function(t)
     LocalPlayer.Character.HumanoidRootPart.CFrame = MissionNpcs[t].part.CFrame
 end)
