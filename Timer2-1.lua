@@ -19,6 +19,10 @@ local Communication = ReplicatedStorage:WaitForChild("Communication")
 
 --  ======================= Game Table =======================  --
 local MissionNpcs, Islands, TravelPoints, Achievements;
+LocalPlayer:SetAttribute("FriendsInServer", 10000)
+LocalPlayer:SetAttribute("RankInGroup", 2)
+LocalPlayer:SetAttribute("InGroup", true)
+LocalPlayer:SetAttribute("Premium", true)
 
 --  ======================= Functions =======================  --
 local function IsvalidMember(obj, target)
@@ -184,6 +188,18 @@ local function freeFish()
     Communication.CollectFishingRewards:FireServer()
 end
 
+---- getChest
+local function getChest()
+    for _, object in ipairs(Workspace.Chests:GetChildren()) do
+        if object.Name == "Chest" then
+            return object
+        end
+    end
+end
+
+--  ======================= Update Game Table =======================  --
+Islands, TravelPoints, Achievements = getGameTables()
+
 ---- claimRewardOnline
 local function claimRewardOnline()
     for i = 1, 12 do
@@ -201,18 +217,6 @@ local function claimAchivements()
         Communication.CollectAchievement:FireServer(unpack(args))
     end
 end
-
----- getChest
-local function getChest()
-    for _, object in ipairs(Workspace.Chests:GetChildren()) do
-        if object.Name == "Chest" then
-            return object
-        end
-    end
-end
-
---  ======================= Update Game Table =======================  --
-MissionNpcs, Islands, TravelPoints, Achievements = getGameTables()
 
 --  ======================= UI =======================  --
 -- Loadstring
