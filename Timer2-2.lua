@@ -49,17 +49,6 @@ local function getGameTables()
         end
     end
 
-    -- MissionNpcs workspace.MissionStuff
-    for _, object in ipairs(Workspace.MissionStuff:GetChildren()) do
-        if object:IsA("Folder") then
-            for _, npc in ipairs(object:GetChildren()) do
-                if npc:IsA("Model") then
-                    table.insert(MissionNpcs, npc.Name)
-                end
-            end
-        end
-    end
-
     -- Achievements game:GetService("Players").LocalPlayer.PlayerGui.Main.Menus.Achievements.Inner.ScrollingFrame.Hold
     for _, object in ipairs(LocalPlayer.PlayerGui.Main.Menus.Achievements.Inner.ScrollingFrame.Hold:GetChildren()) do
         if pcall(function()
