@@ -272,8 +272,9 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
                     if not _G.AutoFarmTrees then
                         break
                     end
-
-                    Communication.HitTree:FireServer(tree.id)
+                    for i = 1, 10 do
+                        Communication.HitTree:FireServer(tree.id)
+                    end
                     task.wait()
                 end
             end)
@@ -430,6 +431,6 @@ MiscS:Dropdown("Select TravelPoints to Teleport", TravelPoints, function(t)
     LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.TravelPoints[t].CFrame
 end)
 
-MiscS:Dropdown("Select MissionNpcs to Teleport", MissionNpcs, function(t)
-    LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MissionStuff[t].HumanoidRootPart.CFrame
-end)
+-- MiscS:Dropdown("Select MissionNpcs to Teleport", MissionNpcs, function(t)
+--     LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MissionStuff[t].HumanoidRootPart.CFrame
+-- end)
