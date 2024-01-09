@@ -89,5 +89,6 @@ while true do
         task.wait()
     end
 
+    task.wait(1)
     Communication:WaitForChild("SellLogs"):FireServer()
 end
