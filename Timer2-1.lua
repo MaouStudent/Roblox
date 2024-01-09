@@ -35,20 +35,14 @@ local function getGameTables()
     -- TravelPoints workspace.TravelPoints
     for _, object in ipairs(Workspace.TravelPoints:GetChildren()) do
         if object:IsA("Part") then
-            TravelPoints[object.Name] = {
-                position = object.Position,
-                part = object
-            }
+            table.insert(TravelPoints, object.Name)
         end
     end
 
     -- Islands workspace.FastTravel
     for _, object in ipairs(Workspace.FastTravel:GetChildren()) do
         if object:IsA("Part") then
-            Islands[object.Name] = {
-                position = object.Position,
-                part = object
-            }
+            table.insert(Islands, object.Name)
         end
     end
 
@@ -57,10 +51,7 @@ local function getGameTables()
         if object:IsA("Folder") then
             for _, npc in ipairs(object:GetChildren()) do
                 if npc:IsA("Model") then
-                    MissionNpcs[npc.Name] = {
-                        position = npc.PrimaryPart.Position,
-                        part = npc
-                    }
+                    table.insert(MissionNpcs, npc.Name)
                 end
             end
         end
@@ -432,13 +423,13 @@ local MiscS = Misc:Section("Misc")
 
 -- Misc Dropdown Select Teleport to Game Table
 MiscS:Dropdown("Select Islands to Teleport", Islands, function(t)
-    LocalPlayer.Character.HumanoidRootPart.CFrame = Islands[t].part.CFrame
+    LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.FastTravel[t].CFrame
 end)
 
 MiscS:Dropdown("Select TravelPoints to Teleport", TravelPoints, function(t)
-    LocalPlayer.Character.HumanoidRootPart.CFrame = TravelPoints[t].part.CFrame
+    LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.TravelPoints[t].CFrame
 end)
 
 MiscS:Dropdown("Select MissionNpcs to Teleport", MissionNpcs, function(t)
-    LocalPlayer.Character.HumanoidRootPart.CFrame = MissionNpcs[t].part.CFrame
+    LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MissionStuff[t].HumanoidRootPart.CFrame
 end)
