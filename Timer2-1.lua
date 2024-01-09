@@ -232,7 +232,8 @@ MissionNpcs, Islands, TravelPoints, Achievements = getGameTables()
 
 --  ======================= UI =======================  --
 -- Loadstring
-local Neverlose_Main = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mana42138/Neverlose-UI/main/Source.lua"))()
+local Neverlose_Main = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/MaouStudent/Roblox/main/Lib/Neverlose-UI.lua"))()
 
 -- Creating Window
 local Win = Neverlose_Main:Window({
@@ -254,7 +255,7 @@ local Misc = TabSection1:Tab("Misc")
 local FarmSection = Autofarm:Section("Autofarm")
 
 -- AutoSell Toggle
-local AutoSellVar = Misc:Toggle("AutoSell", function(t)
+local AutoSellVar = FarmSection:Toggle("AutoSell", function(t)
     _G.AutoSell = t
 
     spawn(function()
