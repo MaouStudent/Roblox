@@ -372,6 +372,20 @@ local AutoFarmFishVar = FarmSection:Toggle("AutoFarmFish (only island fish)", fu
 end)
 AutoFarmFishVar:Set(false)
 
+-- AutoRebirth Toggle
+local AutoRebirthVar = FarmSection:Toggle("AutoRebirth", function(t)
+    _G.AutoRebirth = t
+    spawn(function()
+        while _G.AutoRebirth do
+            pcall(function()
+                Communication.Rebirth:FireServer()
+            end)
+            task.wait(10)
+        end
+    end)
+end)
+AutoRebirthVar:Set(false)
+
 -- AutoClaimOnline Toggle
 local AutoClaimOnlineVar = FarmSection:Toggle("AutoClaimOnline", function(t)
     _G.AutoClaimOnline = t
@@ -395,20 +409,6 @@ local AutoClaimAchivementsVar = FarmSection:Toggle("AutoClaimAchivements", funct
     end)
 end)
 AutoClaimAchivementsVar:Set(false)
-
--- AutoRebirth Toggle
-local AutoRebirthVar = FarmSection:Toggle("AutoRebirth", function(t)
-    _G.AutoRebirth = t
-    spawn(function()
-        while _G.AutoRebirth do
-            pcall(function()
-                Communication.Rebirth:FireServer()
-            end)
-            task.wait(10)
-        end
-    end)
-end)
-AutoRebirthVar:Set(false)
 
 -- AutoChest Toggle
 local AutoChestVar = FarmSection:Toggle("AutoChest", function(t)
