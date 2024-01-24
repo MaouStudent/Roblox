@@ -257,7 +257,7 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
                     if not _G.AutoFarmTrees then
                         break
                     end
-                    for i = 1, 50 do
+                    for i = 1, 20 do
                         Communication.HitTree:FireServer(tree.id)
                     end
                 end
