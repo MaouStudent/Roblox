@@ -98,9 +98,9 @@ local function getTrees()
         end
     end
 
-    -- sort by logs
+    -- sort by distance
     table.sort(trees, function(a, b)
-        return a.logs > b.logs
+        return (a.primaryPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < (b.primaryPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     end)
 
     return trees
@@ -260,7 +260,6 @@ local AutoFarmTreesVar = FarmSection:Toggle("AutoFarmTrees", function(t)
                     for i = 1, 50 do
                         Communication.HitTree:FireServer(tree.id)
                     end
-                    wait()
                 end
             end)
             task.wait()
