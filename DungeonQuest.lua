@@ -121,5 +121,5 @@ _G.UI_lvl = "33"
 
 -- Discord Webhook
 _G.webhookEnabled = true
-_G.webhookLink = "https://discord.com/api/webhooks/1194126341847654520/IksZGWD2UIlVEXwW9nkTrOpOh5uUapTdpfp63DiqErJ4lNqq9grHlxwA-ft141Y1RJrg" -- your webhook
+_G.webhookLink = "https://discord.com/api/webhooks/1199633872065921074/dAGuRin3P6rdE0PZW3hN4r2SXbKcBiHg-xy6YQBLDkIn8Rlvj7_kIvW6b_tNZ9KOmPeN" -- your webhook
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/PeanutQuest/PeanutQuestBeta/main/Release.lua'),true))()

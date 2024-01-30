@@ -1,6 +1,8 @@
 {
     "robloxLsp.diagnostics.globals": [
         "Communication",
-        "Communication"
+        "Communication",
+        "UseSword",
+        "getMobs"
     ]
 }

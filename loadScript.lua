@@ -2,8 +2,12 @@ repeat
     wait()
 until game:IsLoaded()
 wait()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){202041827003}
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Odrexyo/Script/main/Loader.lua"))()
+
+pcall(function()
+    local urlRaw = ""
+    loadstring(game:HttpGet(urlRaw))()
+end)
+
 wait()
 repeat wait() until game.CoreGui:FindFirstChild('RobloxPromptGui')
 
